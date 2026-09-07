@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ứng Dụng Web An Toàn - Dương Tấn Chánh</title>
+    <title>Ứng Dụng Web An Toàn - D.T.Chánh</title>
     <style>
         * {
             box-sizing: border-box;
@@ -34,8 +34,12 @@
             background-image:
                 radial-gradient(circle at 15% 15%, rgba(64, 32, 208, 0.4) 0%, transparent 45%),
                 radial-gradient(circle at 85% 85%, rgba(0, 102, 182, 0.35) 0%, transparent 45%);
-            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
             color: var(--text-light);
+            font-size: 1.2rem;
+            font-weight: normal;
             max-width: 62.5rem;
             margin-left: auto;
             margin-right: auto;
@@ -54,6 +58,7 @@
             text-align: center;
             margin-top: 1rem;
             margin-bottom: 1rem;
+            width: 100%;
         }
 
         .avatar-box {
@@ -61,6 +66,7 @@
             margin-bottom: 1rem;
             cursor: pointer;
             outline: none;
+            user-select: none;
         }
 
         .avatar-image {
@@ -69,15 +75,17 @@
             border-radius: 50%;
             border: 3px solid var(--secondary);
             background-color: var(--bg-surface);
-            box-shadow: 0 0 20px rgba(64, 32, 208, 0.6);
+            box-shadow: 0 0 1.25rem rgba(64, 32, 208, 0.6);
             transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            display: block;
+            object-fit: cover;
         }
 
         .avatar-box:hover .avatar-image,
         .avatar-box:focus-visible .avatar-image {
             transform: scale(1.08) rotate(4deg);
             border-color: var(--highlight);
-            box-shadow: 0 0 25px rgba(127, 221, 15, 0.6);
+            box-shadow: 0 0 1.5rem rgba(127, 221, 15, 0.6);
         }
 
         /* Khung hiển thị mã QR & Email liên hệ */
@@ -90,8 +98,8 @@
             border: 2px solid var(--secondary);
             border-radius: 0.8rem;
             padding: 1rem;
-            margin-bottom: 1.2rem;
-            box-shadow: 0 4px 25px rgba(64, 32, 208, 0.4);
+            margin-bottom: 1rem;
+            box-shadow: 0 0.25rem 1.5rem rgba(64, 32, 208, 0.4);
             gap: 0.8rem;
             width: 100%;
             max-width: 18rem;
@@ -113,7 +121,7 @@
         .author-qr-email-link {
             color: var(--highlight);
             text-decoration: none;
-            font-size: 1.0rem;
+            font-size: 1.2rem;
             font-weight: bold;
             word-break: break-all;
             transition: color 0.2s ease, text-decoration 0.2s ease;
@@ -122,6 +130,12 @@
         .author-qr-email-link:hover {
             color: var(--text-light);
             text-decoration: underline;
+        }
+
+        .author-qr-hint {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            font-weight: normal;
         }
 
         h1 {
@@ -148,7 +162,7 @@
 
         .header-description {
             color: var(--text-muted);
-            font-size: 1.0rem;
+            font-size: 1.2rem;
             font-weight: normal;
             text-align: center;
             margin-bottom: 1rem;
@@ -163,8 +177,9 @@
             border: 2px solid var(--border-subtle);
             border-radius: 2rem;
             padding: 0.5rem 1rem;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            font-size: 1.2rem;
+            font-weight: normal;
+            box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.4);
             margin-bottom: 1rem;
         }
 
@@ -178,7 +193,7 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             width: 100%;
         }
 
@@ -194,20 +209,19 @@
             background-color: var(--bg-surface);
             border: 2px solid var(--border-subtle);
             border-radius: 2rem;
-            padding: 1rem;
-            padding-left: 3rem;
-            padding-right: 3rem;
+            padding: 0.8rem 3rem;
             color: var(--text-light);
-            font-size: 1.0rem;
+            font-size: 1.2rem;
+            font-weight: normal;
             font-family: inherit;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.3);
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .search-field-input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(0, 102, 182, 0.5);
+            box-shadow: 0 0 1rem rgba(0, 102, 182, 0.5);
         }
 
         .search-icon-svg {
@@ -262,17 +276,18 @@
             color: var(--text-muted);
             padding: 0.5rem 1rem;
             border-radius: 2rem;
-            font-size: 0.95rem;
+            font-size: 1.2rem;
             font-weight: normal;
             cursor: pointer;
             font-family: inherit;
             transition: all 0.25s ease;
+            user-select: none;
         }
 
         .filter-pill-button:hover {
             color: var(--text-light);
             border-color: var(--primary);
-            transform: translateY(-1px);
+            transform: translateY(-0.1rem);
         }
 
         .filter-pill-button.active {
@@ -280,7 +295,7 @@
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             border-color: transparent;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(64, 32, 208, 0.4);
+            box-shadow: 0 0.25rem 1rem rgba(64, 32, 208, 0.4);
         }
 
         /* Danh sách thẻ dự án */
@@ -292,6 +307,7 @@
         }
 
         .project-row-card {
+            position: relative;
             background-color: var(--bg-surface);
             border: 2px solid var(--border-subtle);
             border-radius: 0.8rem;
@@ -299,25 +315,25 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
             transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
         .project-row-card:hover {
             border-color: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(64, 32, 208, 0.25);
+            transform: translateY(-0.15rem);
+            box-shadow: 0 0.375rem 1.25rem rgba(64, 32, 208, 0.25);
         }
 
         .project-card-header {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             width: 100%;
         }
 
         .project-direct-link {
             display: inline-flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 0.6rem;
             text-decoration: none;
             color: var(--text-light);
@@ -331,7 +347,7 @@
 
         .project-emoji-icon {
             font-size: 1.3rem;
-            line-height: 1;
+            line-height: 1.3;
             flex-shrink: 0;
         }
 
@@ -340,21 +356,27 @@
             font-weight: bold;
             color: inherit;
             transition: color 0.2s ease;
+            line-height: 1.4;
+            word-break: break-word;
         }
 
         .project-description-text {
             color: var(--text-muted);
-            font-size: 1.0rem;
-            line-height: 1.5;
+            font-size: 1.2rem;
+            font-weight: normal;
+            line-height: 1.6;
+            word-break: break-word;
         }
 
-        /* Dòng thông tin meta: Ngày cập nhật bên trái, Nhãn phân loại bên phải */
+        /* Dòng thông tin meta: Co giãn an toàn trên di động */
         .project-meta-info {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             gap: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 1.2rem;
+            font-weight: normal;
             color: var(--text-muted);
             border-top: 2px solid var(--card-bg);
             padding-top: 0.5rem;
@@ -365,11 +387,11 @@
             background-color: var(--card-bg);
             border: 2px solid var(--border-subtle);
             color: var(--highlight);
-            padding: 0.2rem 0.6rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 1rem;
-            font-size: 0.85rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            white-space: nowrap;
+            word-break: normal;
         }
 
         /* Trạng thái trống (Không có kết quả) */
@@ -401,11 +423,17 @@
             color: var(--text-light);
         }
 
+        .empty-results-box p {
+            font-size: 1.2rem;
+            font-weight: normal;
+        }
+
         /* Chân trang */
         footer {
             margin-top: 3rem;
             text-align: center;
-            font-size: 0.95rem;
+            font-size: 1.2rem;
+            font-weight: normal;
             color: var(--text-muted);
             border-top: 2px solid var(--bg-surface);
             padding-top: 1rem;
@@ -417,12 +445,12 @@
 <body>
 
     <header>
-        <div class="avatar-box" id="avatar-box" role="button" tabindex="0" title="Bấm để xem mã QR liên hệ" aria-label="Bấm để xem mã QR liên hệ">
-            <img src="images/author.jpg" alt="Dương Tấn Chánh Avatar" class="avatar-image">
+        <div class="avatar-box" id="avatar-box" role="button" tabindex="0" title="Bấm để xem mã QR liên hệ" aria-label="Bấm để xem mã QR liên hệ" aria-expanded="false">
+            <img src="images/author.jpg" alt="D.T.Chánh Avatar" class="avatar-image" id="avatar-image">
         </div>
-        <div class="author-qr-panel" id="author-qr-panel"></div>
+        <div class="author-qr-panel" id="author-qr-panel" role="region" aria-label="Thông tin liên hệ QR"></div>
         <h1>ỨNG DỤNG WEB AN TOÀN</h1>
-        <div class="author-line">Dương Tấn Chánh</div>
+        <div class="author-line">D.T.Chánh</div>
         <p class="header-description">Bộ sưu tập các ứng dụng web nhỏ gọn, công cụ tiện ích và sản phẩm mã hoá bảo mật chạy trực tiếp trên trình duyệt.</p>
         <div class="stats-badge-box">
             <span>Tổng số ứng dụng hiển thị:</span>
@@ -430,26 +458,26 @@
         </div>
     </header>
 
-    <section class="controls-wrapper">
+    <section class="controls-wrapper" aria-label="Khu vực tìm kiếm và bộ lọc">
         <div class="search-field-box">
-            <svg class="search-icon-svg" stroke-width="2" viewBox="0 0 24 24">
+            <svg class="search-icon-svg" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
-            <input type="text" id="search-input" class="search-field-input" placeholder="Tìm kiếm công cụ hoặc tính năng..." autocomplete="off">
-            <button id="clear-search-btn" class="clear-input-button" title="Xoá tìm kiếm" aria-label="Xoá tìm kiếm">
-                <svg stroke-width="2" viewBox="0 0 24 24">
+            <input type="text" id="search-input" class="search-field-input" placeholder="Tìm kiếm công cụ hoặc tính năng..." autocomplete="off" aria-label="Tìm kiếm ứng dụng">
+            <button id="clear-search-btn" class="clear-input-button" title="Xoá tìm kiếm" aria-label="Xoá nội dung tìm kiếm">
+                <svg stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
         </div>
 
-        <div class="filters-container" id="filters-container"></div>
+        <nav class="filters-container" id="filters-container" aria-label="Bộ lọc danh mục"></nav>
     </section>
 
-    <main class="project-items-list" id="project-items-list"></main>
+    <main class="project-items-list" id="project-items-list" aria-live="polite"></main>
 
-    <div class="empty-results-box" id="empty-results-box">
-        <svg stroke-width="1.5" viewBox="0 0 24 24">
+    <div class="empty-results-box" id="empty-results-box" role="status">
+        <svg stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
         <div class="empty-results-title">Không tìm thấy kết quả</div>
@@ -457,13 +485,21 @@
     </div>
 
     <footer>
-        <p>Bản quyền thiết kế &copy; 2026 bởi Dương Tấn Chánh.</p>
+        <p>Bản quyền thiết kế &copy; 2026 bởi D.T.Chánh.</p>
     </footer>
 
     <script>
-        // HẰNG SỐ MÃ QR & EMAIL TÁC GIẢ (Có thể dễ dàng thay đổi nội dung tại đây)
-        const AUTHOR_QR_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" width="350" height="350"><rect x="0" y="0" width="33" height="33" fill="#ffffff"/><path d="M2,2h7v1h-7z M10,2h1v2h-1z M13,2h2v1h-2z M17,2h2v1h-2z M22,2h1v4h-1z M24,2h7v1h-7z M2,3h1v6h-1z M8,3h1v6h-1z M11,3h1v1h-1z M13,3h1v1h-1z M16,3h2v2h-2z M20,3h1v1h-1z M24,3h1v6h-1z M30,3h1v6h-1z M4,4h3v3h-3z M14,4h2v1h-2z M26,4h3v3h-3z M10,5h2v1h-2z M13,5h2v1h-2z M18,5h1v1h-1z M20,5h1v5h-1z M15,6h1v1h-1z M19,6h1v2h-1z M12,7h1v2h-1z M16,7h1v4h-1z M21,7h1v1h-1z M3,8h5v1h-5z M10,8h1v2h-1z M14,8h1v1h-1z M18,8h1v1h-1z M22,8h1v1h-1z M25,8h5v1h-5z M15,9h1v2h-1z M19,9h1v2h-1z M21,9h1v2h-1z M2,10h1v4h-1z M4,10h2v1h-2z M7,10h3v1h-3z M11,10h1v4h-1z M18,10h1v2h-1z M24,10h1v2h-1z M27,10h1v2h-1z M29,10h2v1h-2z M3,11h1v1h-1z M5,11h3v1h-3z M9,11h1v2h-1z M12,11h1v1h-1z M17,11h1v3h-1z M22,11h2v3h-2z M26,11h1v2h-1z M29,11h1v1h-1z M6,12h1v1h-1z M8,12h1v1h-1z M14,12h1v4h-1z M16,12h1v2h-1z M21,12h1v1h-1z M30,12h1v1h-1z M3,13h3v1h-3z M7,13h1v1h-1z M13,13h1v3h-1z M15,13h1v1h-1z M19,13h1v4h-1z M25,13h1v3h-1z M27,13h1v5h-1z M3,14h1v4h-1z M8,14h2v1h-2z M12,14h1v2h-1z M18,14h1v1h-1z M22,14h1v2h-1z M26,14h1v5h-1z M9,15h2v1h-2z M15,15h1v1h-1z M28,15h3v1h-3z M2,16h1v1h-1z M4,16h1v1h-1z M6,16h3v1h-3z M11,16h1v2h-1z M16,16h1v1h-1z M20,16h2v2h-2z M23,16h2v2h-2z M28,16h1v2h-1z M30,16h1v2h-1z M5,17h1v1h-1z M9,17h1v3h-1z M12,17h2v2h-2z M15,17h1v1h-1z M17,17h1v1h-1z M22,17h1v2h-1z M25,17h1v2h-1z M29,17h1v5h-1z M4,18h1v1h-1z M8,18h1v1h-1z M10,18h1v2h-1z M24,18h1v2h-1z M3,19h1v1h-1z M6,19h1v2h-1z M11,19h1v1h-1z M15,19h1v1h-1z M20,19h2v1h-2z M2,20h1v1h-1z M4,20h2v1h-2z M7,20h2v1h-2z M12,20h3v1h-3z M19,20h1v1h-1z M23,20h1v3h-1z M28,20h1v1h-1z M30,20h1v1h-1z M4,21h1v2h-1z M10,21h2v1h-2z M14,21h1v4h-1z M17,21h2v1h-2z M24,21h1v2h-1z M3,22h1v1h-1z M8,22h1v1h-1z M12,22h1v1h-1z M15,22h1v3h-1z M17,22h1v2h-1z M19,22h4v1h-4z M25,22h3v1h-3z M30,22h1v1h-1z M10,23h1v3h-1z M13,23h1v1h-1z M16,23h1v1h-1z M22,23h1v4h-1z M26,23h1v4h-1z M29,23h1v2h-1z M2,24h7v1h-7z M11,24h1v3h-1z M18,24h1v2h-1z M20,24h2v1h-2z M24,24h1v1h-1z M2,25h1v6h-1z M8,25h1v6h-1z M13,25h1v1h-1z M19,25h1v1h-1z M28,25h1v4h-1z M4,26h3v3h-3z M12,26h1v1h-1z M14,26h1v1h-1z M16,26h2v1h-2z M23,26h3v1h-3z M29,26h2v1h-2z M10,27h1v2h-1z M15,27h2v1h-2z M18,27h4v1h-4z M27,27h1v1h-1z M29,27h1v1h-1z M11,28h5v1h-5z M17,28h2v1h-2z M21,28h1v1h-1z M24,28h2v1h-2z M30,28h1v2h-1z M12,29h3v1h-3z M16,29h1v2h-1z M18,29h1v1h-1z M20,29h1v1h-1z M22,29h2v2h-2z M3,30h5v1h-5z M10,30h2v1h-2z M14,30h2v1h-2z M17,30h1v1h-1z M19,30h1v1h-1z M24,30h1v1h-1z M29,30h1v1h-1z" fill="#000000" shape-rendering="crispEdges"/></svg>`;
+        // HẰNG SỐ MÃ QR & EMAIL TÁC GIẢ
+        const AUTHOR_QR_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" width="350" height="350" aria-label="Mã QR liên hệ"><rect x="0" y="0" width="33" height="33" fill="#ffffff"/><path d="M2,2h7v1h-7z M10,2h1v2h-1z M13,2h2v1h-2z M17,2h2v1h-2z M22,2h1v4h-1z M24,2h7v1h-7z M2,3h1v6h-1z M8,3h1v6h-1z M11,3h1v1h-1z M13,3h1v1h-1z M16,3h2v2h-2z M20,3h1v1h-1z M24,3h1v6h-1z M30,3h1v6h-1z M4,4h3v3h-3z M14,4h2v1h-2z M26,4h3v3h-3z M10,5h2v1h-2z M13,5h2v1h-2z M18,5h1v1h-1z M20,5h1v5h-1z M15,6h1v1h-1z M19,6h1v2h-1z M12,7h1v2h-1z M16,7h1v4h-1z M21,7h1v1h-1z M3,8h5v1h-5z M10,8h1v2h-1z M14,8h1v1h-1z M18,8h1v1h-1z M22,8h1v1h-1z M25,8h5v1h-5z M15,9h1v2h-1z M19,9h1v2h-1z M21,9h1v2h-1z M2,10h1v4h-1z M4,10h2v1h-2z M7,10h3v1h-3z M11,10h1v4h-1z M18,10h1v2h-1z M24,10h1v2h-1z M27,10h1v2h-1z M29,10h2v1h-2z M3,11h1v1h-1z M5,11h3v1h-3z M9,11h1v2h-1z M12,11h1v1h-1z M17,11h1v3h-1z M22,11h2v3h-2z M26,11h1v2h-1z M29,11h1v1h-1z M6,12h1v1h-1z M8,12h1v1h-1z M14,12h1v4h-1z M16,12h1v2h-1z M21,12h1v1h-1z M30,12h1v1h-1z M3,13h3v1h-3z M7,13h1v1h-1z M13,13h1v3h-1z M15,13h1v1h-1z M19,13h1v4h-1z M25,13h1v3h-1z M27,13h1v5h-1z M3,14h1v4h-1z M8,14h2v1h-2z M12,14h1v2h-1z M18,14h1v1h-1z M22,14h1v2h-1z M26,14h1v5h-1z M9,15h2v1h-2z M15,15h1v1h-1z M28,15h3v1h-3z M2,16h1v1h-1z M4,16h1v1h-1z M6,16h3v1h-3z M11,16h1v2h-1z M16,16h1v1h-1z M20,16h2v2h-2z M23,16h2v2h-2z M28,16h1v2h-1z M30,16h1v2h-1z M5,17h1v1h-1z M9,17h1v3h-1z M12,17h2v2h-2z M15,17h1v1h-1z M17,17h1v1h-1z M22,17h1v2h-1z M25,17h1v2h-1z M29,17h1v5h-1z M4,18h1v1h-1z M8,18h1v1h-1z M10,18h1v2h-1z M24,18h1v2h-1z M3,19h1v1h-1z M6,19h1v2h-1z M11,19h1v1h-1z M15,19h1v1h-1z M20,19h2v1h-2z M2,20h1v1h-1z M4,20h2v1h-2z M7,20h2v1h-2z M12,20h3v1h-3z M19,20h1v1h-1z M23,20h1v3h-1z M28,20h1v1h-1z M30,20h1v1h-1z M4,21h1v2h-1z M10,21h2v1h-2z M14,21h1v4h-1z M17,21h2v1h-2z M24,21h1v2h-1z M3,22h1v1h-1z M8,22h1v1h-1z M12,22h1v1h-1z M15,22h1v3h-1z M17,22h1v2h-1z M19,22h4v1h-4z M25,22h3v1h-3z M30,22h1v1h-1z M10,23h1v3h-1z M13,23h1v1h-1z M16,23h1v1h-1z M22,23h1v4h-1z M26,23h1v4h-1z M29,23h1v2h-1z M2,24h7v1h-7z M11,24h1v3h-1z M18,24h1v2h-1z M20,24h2v1h-2z M24,24h1v1h-1z M2,25h1v6h-1z M8,25h1v6h-1z M13,25h1v1h-1z M19,25h1v1h-1z M28,25h1v4h-1z M4,26h3v3h-3z M12,26h1v1h-1z M14,26h1v1h-1z M16,26h2v1h-2z M23,26h3v1h-3z M29,26h2v1h-2z M10,27h1v2h-1z M15,27h2v1h-2z M18,27h4v1h-4z M27,27h1v1h-1z M29,27h1v1h-1z M11,28h5v1h-5z M17,28h2v1h-2z M21,28h1v1h-1z M24,28h2v1h-2z M30,28h1v2h-1z M12,29h3v1h-3z M16,29h1v2h-1z M18,29h1v1h-1z M20,29h1v1h-1z M22,29h2v2h-2z M3,30h5v1h-5z M10,30h2v1h-2z M14,30h2v1h-2z M17,30h1v1h-1z M19,30h1v1h-1z M24,30h1v1h-1z M29,30h1v1h-1z" fill="#000000" shape-rendering="crispEdges"/></svg>`;
         const AUTHOR_EMAIL = "chanh.rebirth026@aleeas.com";
+
+        // Xử lý chống vỡ ảnh tác giả (Fallback an toàn sang SVG vector khi offline)
+        const avatarImageEl = document.getElementById("avatar-image");
+        if (avatarImageEl) {
+            avatarImageEl.addEventListener("error", () => {
+                avatarImageEl.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%234020D0"><rect width="100" height="100" fill="%231A1A1A"/><text x="50%" y="55%" font-size="35" fill="%237FDD0F" font-family="sans-serif" text-anchor="middle" dominant-baseline="middle">DTC</text></svg>`;
+            });
+        }
 
         // Khởi tạo bảng hiển thị QR & Email từ hằng số
         const avatarBoxEl = document.getElementById("avatar-box");
@@ -473,17 +509,27 @@
             authorQrPanelEl.innerHTML = `
                 ${AUTHOR_QR_SVG}
                 <a href="mailto:${AUTHOR_EMAIL}" class="author-qr-email-link">${AUTHOR_EMAIL}</a>
+                <span class="author-qr-hint">(Bấm ra ngoài để đóng)</span>
             `;
         }
 
-        function toggleQrPanel() {
-            if (authorQrPanelEl) {
-                authorQrPanelEl.classList.toggle("active");
+        function toggleQrPanel(show) {
+            if (!authorQrPanelEl) return;
+            const willShow = (typeof show === "boolean") ? show : !authorQrPanelEl.classList.contains("active");
+            if (willShow) {
+                authorQrPanelEl.classList.add("active");
+                if (avatarBoxEl) avatarBoxEl.setAttribute("aria-expanded", "true");
+            } else {
+                authorQrPanelEl.classList.remove("active");
+                if (avatarBoxEl) avatarBoxEl.setAttribute("aria-expanded", "false");
             }
         }
 
         if (avatarBoxEl) {
-            avatarBoxEl.addEventListener("click", toggleQrPanel);
+            avatarBoxEl.addEventListener("click", (e) => {
+                e.stopPropagation();
+                toggleQrPanel();
+            });
             avatarBoxEl.addEventListener("keydown", (e) => {
                 if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
@@ -491,6 +537,22 @@
                 }
             });
         }
+
+        // Tương tác bấm ra ngoài (Click outside) hoặc phím Escape để đóng QR
+        document.addEventListener("click", (e) => {
+            if (authorQrPanelEl && authorQrPanelEl.classList.contains("active")) {
+                if (!authorQrPanelEl.contains(e.target) && !avatarBoxEl.contains(e.target)) {
+                    toggleQrPanel(false);
+                }
+            }
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && authorQrPanelEl && authorQrPanelEl.classList.contains("active")) {
+                toggleQrPanel(false);
+                avatarBoxEl.focus();
+            }
+        });
 
         const categoryMap = {
             security: "Bảo mật",
@@ -507,7 +569,7 @@
                 name: "tkb",
                 emoji: "🗓️",
                 title: "Thời Khoá Biểu",
-                description: "Quản lý thời khóa biểu cho nhiều lớp trên cùng một ứng dụng.",
+                description: "Quản lý thời khoá biểu cho nhiều lớp trên cùng một ứng dụng.",
                 category: "utility",
                 updated: "07/09/2026"
             },
@@ -570,7 +632,7 @@
             {
                 name: "duong-sinh",
                 emoji: "❤️",
-                title: "Tài Liệu Dưỡng Sinh - Dương Tấn Chánh",
+                title: "Tài Liệu Dưỡng Sinh - D.T.Chánh",
                 description: "Chữa Bệnh Không Dùng Thuốc Trong Đông Y.",
                 category: "health",
                 updated: "29/08/2026"
@@ -736,15 +798,29 @@
             return html.replace(/<[^>]*>?/gm, " ");
         }
 
-        // Chuyển đổi chuỗi DD/MM/YYYY sang Timestamp để so sánh ngày chính xác
+        // Làm sạch mã slug URL an toàn
+        function sanitizeSlug(slug) {
+            if (!slug) return "";
+            return slug.trim().toLowerCase().replace(/[^a-z0-9-]/g, "");
+        }
+
+        // Chuyển đổi và kiểm tra ngày chặt chẽ chống trượt ngày (Rollover)
         function parseDateToTimestamp(dateStr) {
-            if (!dateStr) return 0;
-            const parts = dateStr.split("/");
+            if (!dateStr || typeof dateStr !== "string") return 0;
+            const parts = dateStr.trim().split("/");
             if (parts.length !== 3) return 0;
             const day = parseInt(parts[0], 10);
             const month = parseInt(parts[1], 10) - 1;
             const year = parseInt(parts[2], 10);
-            return new Date(year, month, day).getTime();
+
+            if (isNaN(day) || isNaN(month) || isNaN(year)) return 0;
+
+            const dateObj = new Date(year, month, day);
+            // Kiểm tra tính hợp lệ: nếu ngày tự tăng sang tháng sau -> không hợp lệ
+            if (dateObj.getFullYear() !== year || dateObj.getMonth() !== month || dateObj.getDate() !== day) {
+                return 0;
+            }
+            return dateObj.getTime();
         }
 
         const projectItemsListEl = document.getElementById("project-items-list");
@@ -757,33 +833,46 @@
         let currentFilter = "all";
         let searchQuery = "";
 
-        // Tiền xử lý dữ liệu: Tạo chỉ mục tìm kiếm và Tự động sắp xếp ngày giảm dần (Mới nhất lên đầu)
+        // Tiền xử lý dữ liệu an toàn (Phòng ngừa thiếu thuộc tính và tự sắp xếp ngày mới nhất lên đầu)
         const preprocessedProjects = projectsData
             .map(proj => {
-                const rawDescriptionText = stripHtmlTags(proj.description);
-                const categoryText = categoryMap[proj.category] || "";
-                const searchIndex = removeAccents(`${proj.title} ${proj.name} ${rawDescriptionText} ${categoryText}`);
+                const safeTitle = proj.title || "Ứng dụng chưa đặt tên";
+                const safeName = sanitizeSlug(proj.name);
+                const safeEmoji = proj.emoji || "📦";
+                const safeDesc = proj.description || "";
+                const safeCategory = (proj.category || "utility").toLowerCase();
+                const safeUpdated = proj.updated || "01/01/2026";
+
+                const rawDescriptionText = stripHtmlTags(safeDesc);
+                const categoryText = categoryMap[safeCategory] || safeCategory;
+                const searchIndex = removeAccents(`${safeTitle} ${safeName} ${rawDescriptionText} ${categoryText}`);
+
                 return {
-                    ...proj,
-                    timestamp: parseDateToTimestamp(proj.updated),
+                    name: safeName,
+                    emoji: safeEmoji,
+                    title: safeTitle,
+                    description: safeDesc,
+                    category: safeCategory,
+                    updated: safeUpdated,
+                    timestamp: parseDateToTimestamp(safeUpdated),
                     searchIndex: searchIndex
                 };
             })
             .sort((a, b) => b.timestamp - a.timestamp);
 
         function renderFilters() {
-            const activeCategories = [...new Set(projectsData.map(p => p.category))];
-            let filtersHtml = `<button type="button" class="filter-pill-button active" data-filter="all">Tất cả</button>`;
+            const activeCategories = [...new Set(preprocessedProjects.map(p => p.category))];
+            let filtersHtml = `<button type="button" class="filter-pill-button active" data-filter="all" aria-pressed="true">Tất cả</button>`;
 
             for (const [key, value] of Object.entries(categoryMap)) {
                 if (activeCategories.includes(key)) {
-                    filtersHtml += `<button type="button" class="filter-pill-button" data-filter="${key}">${value}</button>`;
+                    filtersHtml += `<button type="button" class="filter-pill-button" data-filter="${key}" aria-pressed="false">${value}</button>`;
                 }
             }
 
             activeCategories.forEach(cat => {
                 if (!(cat in categoryMap)) {
-                    filtersHtml += `<button type="button" class="filter-pill-button" data-filter="${cat}">${cat}</button>`;
+                    filtersHtml += `<button type="button" class="filter-pill-button" data-filter="${cat}" aria-pressed="false">${cat}</button>`;
                 }
             });
 
@@ -792,23 +881,54 @@
             const buttons = filtersContainerEl.querySelectorAll(".filter-pill-button");
             buttons.forEach(btn => {
                 btn.addEventListener("click", () => {
-                    buttons.forEach(b => b.classList.remove("active"));
+                    buttons.forEach(b => {
+                        b.classList.remove("active");
+                        b.setAttribute("aria-pressed", "false");
+                    });
                     btn.classList.add("active");
+                    btn.setAttribute("aria-pressed", "true");
                     currentFilter = btn.getAttribute("data-filter");
                     renderProjects();
                 });
             });
         }
 
+        function syncFilterButtonUI() {
+            const buttons = filtersContainerEl.querySelectorAll(".filter-pill-button");
+            buttons.forEach(btn => {
+                const isActive = (btn.getAttribute("data-filter") === currentFilter);
+                btn.classList.toggle("active", isActive);
+                btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+            });
+        }
+
         function renderProjects() {
             projectItemsListEl.innerHTML = "";
             const cleanQuery = removeAccents(searchQuery.trim());
+            const queryTokens = cleanQuery ? cleanQuery.split(/\s+/).filter(Boolean) : [];
+
+            // Thuật toán kiểm tra điều kiện tìm kiếm theo từng từ đơn (khắc phục lỗi tìm đảo trật tự từ)
+            const matchProject = (proj) => {
+                if (queryTokens.length === 0) return true;
+                return queryTokens.every(token => proj.searchIndex.includes(token));
+            };
+
+            // Khắc phục bẫy bộ lọc (Filter Trap): Tự động mở rộng sang 'all' nếu danh mục hiện tại không có kết quả nhưng danh mục khác có
+            if (currentFilter !== "all" && queryTokens.length > 0) {
+                const matchesInCurrentCategory = preprocessedProjects.some(proj => proj.category === currentFilter && matchProject(proj));
+                if (!matchesInCurrentCategory) {
+                    const matchesAnywhere = preprocessedProjects.some(proj => matchProject(proj));
+                    if (matchesAnywhere) {
+                        currentFilter = "all";
+                        syncFilterButtonUI();
+                    }
+                }
+            }
 
             const filteredProjects = preprocessedProjects.filter(proj => {
                 const matchesFilter = (currentFilter === "all" || proj.category === currentFilter);
                 if (!matchesFilter) return false;
-                if (!cleanQuery) return true;
-                return proj.searchIndex.includes(cleanQuery);
+                return matchProject(proj);
             });
 
             totalCountEl.textContent = filteredProjects.length;
@@ -827,10 +947,11 @@
                 card.className = "project-row-card";
 
                 const categoryLabel = categoryMap[proj.category] || proj.category;
+                const projectUrl = `https://${proj.name}.tanchanh.workers.dev/`;
 
                 card.innerHTML = `
                     <div class="project-card-header">
-                        <a href="https://${proj.name}.tanchanh.workers.dev/" target="_blank" rel="noopener" class="project-direct-link">
+                        <a href="${projectUrl}" target="_blank" rel="noopener" class="project-direct-link">
                             <span class="project-emoji-icon">${proj.emoji}</span>
                             <h2 class="project-heading">${proj.title}</h2>
                         </a>
@@ -865,8 +986,15 @@
             searchInputEl.focus();
         });
 
-        renderFilters();
-        renderProjects();
+        // Khởi chạy ứng dụng an toàn trong try-catch
+        try {
+            renderFilters();
+            renderProjects();
+        } catch (err) {
+            console.error("Lỗi khởi chạy:", err);
+            emptyResultsBoxEl.style.display = "flex";
+            emptyResultsBoxEl.innerHTML = `<p style="color: var(--danger)">Đã xảy ra lỗi nạp dữ liệu. Vui lòng kiểm tra lại!</p>`;
+        }
     </script>
 </body>
 
