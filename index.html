@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ứng Dụng Web An Toàn - D.T.Chánh</title>
+    <title>Ứng Dụng Web An Toàn - Dương Tấn Chánh</title>
     <style>
         * {
             box-sizing: border-box;
@@ -368,7 +368,7 @@
             word-break: break-word;
         }
 
-        /* Dòng thông tin meta: Co giãn an toàn trên di động */
+        /* Dòng thông tin meta */
         .project-meta-info {
             display: flex;
             flex-wrap: wrap;
@@ -428,6 +428,12 @@
             font-weight: normal;
         }
 
+        .system-error-text {
+            color: var(--danger);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
         /* Chân trang */
         footer {
             margin-top: 3rem;
@@ -446,11 +452,11 @@
 
     <header>
         <div class="avatar-box" id="avatar-box" role="button" tabindex="0" title="Bấm để xem mã QR liên hệ" aria-label="Bấm để xem mã QR liên hệ" aria-expanded="false">
-            <img src="images/author.jpg" alt="D.T.Chánh Avatar" class="avatar-image" id="avatar-image">
+            <img src="images/author.jpg" alt="Dương Tấn Chánh Avatar" class="avatar-image" id="avatar-image">
         </div>
         <div class="author-qr-panel" id="author-qr-panel" role="region" aria-label="Thông tin liên hệ QR"></div>
         <h1>ỨNG DỤNG WEB AN TOÀN</h1>
-        <div class="author-line">D.T.Chánh</div>
+        <div class="author-line">Dương Tấn Chánh</div>
         <p class="header-description">Bộ sưu tập các ứng dụng web nhỏ gọn, công cụ tiện ích và sản phẩm mã hoá bảo mật chạy trực tiếp trên trình duyệt.</p>
         <div class="stats-badge-box">
             <span>Tổng số ứng dụng hiển thị:</span>
@@ -485,7 +491,7 @@
     </div>
 
     <footer>
-        <p>Bản quyền thiết kế &copy; 2026 bởi D.T.Chánh.</p>
+        <p>Bản quyền thiết kế &copy; 2026 bởi Dương Tấn Chánh.</p>
     </footer>
 
     <script>
@@ -632,7 +638,7 @@
             {
                 name: "duong-sinh",
                 emoji: "❤️",
-                title: "Tài Liệu Dưỡng Sinh - D.T.Chánh",
+                title: "Tài Liệu Dưỡng Sinh - Dương Tấn Chánh",
                 description: "Chữa Bệnh Không Dùng Thuốc Trong Đông Y.",
                 category: "health",
                 updated: "29/08/2026"
@@ -816,7 +822,6 @@
             if (isNaN(day) || isNaN(month) || isNaN(year)) return 0;
 
             const dateObj = new Date(year, month, day);
-            // Kiểm tra tính hợp lệ: nếu ngày tự tăng sang tháng sau -> không hợp lệ
             if (dateObj.getFullYear() !== year || dateObj.getMonth() !== month || dateObj.getDate() !== day) {
                 return 0;
             }
@@ -986,14 +991,14 @@
             searchInputEl.focus();
         });
 
-        // Khởi chạy ứng dụng an toàn trong try-catch
+        // Khởi chạy ứng dụng an toàn trong khối try-catch, không dùng style inline
         try {
             renderFilters();
             renderProjects();
         } catch (err) {
             console.error("Lỗi khởi chạy:", err);
             emptyResultsBoxEl.style.display = "flex";
-            emptyResultsBoxEl.innerHTML = `<p style="color: var(--danger)">Đã xảy ra lỗi nạp dữ liệu. Vui lòng kiểm tra lại!</p>`;
+            emptyResultsBoxEl.innerHTML = `<p class="system-error-text">Đã xảy ra lỗi nạp dữ liệu. Vui lòng kiểm tra lại!</p>`;
         }
     </script>
 </body>
