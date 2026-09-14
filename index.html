@@ -40,7 +40,7 @@
             color: var(--text-light);
             font-size: 1.2rem;
             font-weight: normal;
-            max-width: 62.5rem;
+            max-width: 41.67rem;
             margin-left: auto;
             margin-right: auto;
             padding: 0.5rem;
@@ -209,7 +209,9 @@
             background-color: var(--bg-surface);
             border: 2px solid var(--border-subtle);
             border-radius: 2rem;
-            padding: 0.8rem 3rem;
+            padding: 0.8rem 1rem;
+            padding-left: 3rem;
+            padding-right: 7.5rem;
             color: var(--text-light);
             font-size: 1.2rem;
             font-weight: normal;
@@ -234,31 +236,32 @@
             pointer-events: none;
         }
 
-        .clear-input-button {
+        /* Nút Xoá Lọc to rõ, tiện dụng */
+        .clear-filters-button {
             position: absolute;
-            right: 1rem;
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
+            right: 0.5rem;
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-subtle);
+            color: var(--highlight);
             cursor: pointer;
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 0.3rem;
-            border-radius: 50%;
-            transition: color 0.2s ease, background-color 0.2s ease;
+            padding: 0.3rem 0.8rem;
+            border-radius: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: inherit;
+            transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+            user-select: none;
         }
 
-        .clear-input-button:hover {
+        .clear-filters-button:hover,
+        .clear-filters-button:focus-visible {
+            outline: none;
             color: var(--text-light);
-            background-color: var(--card-bg);
-        }
-
-        .clear-input-button svg {
-            width: 1.2rem;
-            height: 1.2rem;
-            stroke: currentColor;
-            fill: none;
+            border-color: var(--danger);
+            background-color: var(--bg-surface);
         }
 
         /* Bộ lọc danh mục */
@@ -470,10 +473,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
             <input type="text" id="search-input" class="search-field-input" placeholder="Tìm kiếm công cụ hoặc tính năng..." autocomplete="off" aria-label="Tìm kiếm ứng dụng">
-            <button id="clear-search-btn" class="clear-input-button" title="Xoá tìm kiếm" aria-label="Xoá nội dung tìm kiếm">
-                <svg stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
+            <button id="clear-filters-btn" class="clear-filters-button" title="Xoá toàn bộ lọc và tìm kiếm (ESC)" aria-label="Xoá toàn bộ lọc và tìm kiếm (ESC)">
+                ✕ Xoá Lọc
             </button>
         </div>
 
@@ -515,7 +516,7 @@
             authorQrPanelEl.innerHTML = `
                 ${AUTHOR_QR_SVG}
                 <a href="mailto:${AUTHOR_EMAIL}" class="author-qr-email-link">${AUTHOR_EMAIL}</a>
-                <span class="author-qr-hint">(Bấm ra ngoài để đóng)</span>
+                <span class="author-qr-hint">(Bấm ra ngoài hoặc nhấn ESC để đóng)</span>
             `;
         }
 
@@ -544,19 +545,12 @@
             });
         }
 
-        // Tương tác bấm ra ngoài (Click outside) hoặc phím Escape để đóng QR
+        // Tương tác bấm ra ngoài (Click outside) để đóng QR
         document.addEventListener("click", (e) => {
             if (authorQrPanelEl && authorQrPanelEl.classList.contains("active")) {
                 if (!authorQrPanelEl.contains(e.target) && !avatarBoxEl.contains(e.target)) {
                     toggleQrPanel(false);
                 }
-            }
-        });
-
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && authorQrPanelEl && authorQrPanelEl.classList.contains("active")) {
-                toggleQrPanel(false);
-                avatarBoxEl.focus();
             }
         });
 
@@ -572,20 +566,20 @@
 
         const projectsData = [
             {
-                name: "chuyen-dang-anh",
-                emoji: "🖼️",
-                title: "Chuyển Ảnh Sang Dạng PNG/WebP/JPG",
-                description: "Phần mềm chuyển đổi, tối ưu hoá và nén dung lượng hình ảnh hàng loạt chạy trực tiếp trên trình duyệt máy khách (Client-side).",
-                category: "utility",
-                updated: "08/09/2026"
-            },
-            {
                 name: "tkb",
                 emoji: "🗓️",
                 title: "Thời Khoá Biểu",
                 description: "Quản lý thời khoá biểu cho nhiều lớp trên cùng một ứng dụng.",
                 category: "utility",
-                updated: "07/09/2026"
+                updated: "13/09/2026"
+            },
+            {
+                name: "chuyen-dang-anh",
+                emoji: "🖼️",
+                title: "Chuyển Ảnh Sang Dạng PNG/WebP/JPG",
+                description: "Phần mềm chuyển đổi, tối ưu hoá và nén dung lượng hình ảnh hàng loạt chạy trực tiếp trên trình duyệt máy khách (Client-side).",
+                category: "utility",
+                updated: "13/09/2026"
             },
             {
                 name: "tao-mat-ma",
@@ -593,7 +587,7 @@
                 title: "Tạo Mật Mã An Toàn",
                 description: "Công cụ tạo mật khẩu (password) mạnh ngẫu nhiên, tuỳ biến độ dài và độ phức tạp an toàn.",
                 category: "security",
-                updated: "07/09/2026"
+                updated: "09/09/2026"
             },
             {
                 name: "anh-thanh-pdf",
@@ -624,7 +618,7 @@
                 emoji: "🔍",
                 title: "So Sánh Văn Bản",
                 description: "So sánh trực quan hai văn bản khác nhau để tìm ra điểm khác biệt.",
-                category: "utility",
+                category: "text",
                 updated: "31/08/2026"
             },
             {
@@ -688,7 +682,7 @@
                 emoji: "💰",
                 title: "Quản Lý Thu Chi Hộ Gia Đình",
                 description: "Ứng dụng quản lý thu chi cá nhân, hộ gia đình chạy ngoại tuyến (offline), mã hoá dữ liệu bằng thuật toán mạnh, bảo mật cực cao.",
-                category: "office",
+                category: "calc",
                 updated: "26/07/2026"
             },
             {
@@ -712,7 +706,7 @@
                 emoji: "🖥️",
                 title: "Xem Nội Dung Mã Nguồn HTML",
                 description: "Công cụ gọn nhẹ dùng xem, soạn thảo, thử nghiệm và lưu trữ các tập tin mã nguồn HTML trực tiếp trên trình duyệt.",
-                category: "office",
+                category: "utility",
                 updated: "14/07/2026"
             },
             {
@@ -760,7 +754,7 @@
                 emoji: "📄",
                 title: "Tạo Đơn Xin Tạm Nghỉ Việc",
                 description: "Tạo đơn xin tạm nghỉ việc định dạng Word (.docx) đúng chuẩn văn bản hành chính hiện hành.",
-                category: "text",
+                category: "office",
                 updated: "10/06/2026"
             },
             {
@@ -776,7 +770,7 @@
                 emoji: "📊",
                 title: "Xem & Sửa File CSV/TSV",
                 description: "Công cụ đơn giản, trực quan cho phép tải lên, lọc, chỉnh sửa ô dữ liệu và tải về các tập tin CSV hoặc TSV một cách nhanh chóng.",
-                category: "text",
+                category: "office",
                 updated: "07/06/2026"
             },
             {
@@ -830,7 +824,7 @@
 
         const projectItemsListEl = document.getElementById("project-items-list");
         const searchInputEl = document.getElementById("search-input");
-        const clearSearchBtnEl = document.getElementById("clear-search-btn");
+        const clearFiltersBtnEl = document.getElementById("clear-filters-btn");
         const filtersContainerEl = document.getElementById("filters-container");
         const emptyResultsBoxEl = document.getElementById("empty-results-box");
         const totalCountEl = document.getElementById("total-count");
@@ -894,6 +888,7 @@
                     btn.setAttribute("aria-pressed", "true");
                     currentFilter = btn.getAttribute("data-filter");
                     renderProjects();
+                    updateClearButtonVisibility();
                 });
             });
         }
@@ -905,6 +900,28 @@
                 btn.classList.toggle("active", isActive);
                 btn.setAttribute("aria-pressed", isActive ? "true" : "false");
             });
+        }
+
+        // Cập nhật trạng thái ẩn/hiện của nút "Xoá Lọc"
+        function updateClearButtonVisibility() {
+            const hasSearch = searchQuery.trim() !== "";
+            const hasFilter = currentFilter !== "all";
+            if (hasSearch || hasFilter) {
+                clearFiltersBtnEl.style.display = "inline-flex";
+            } else {
+                clearFiltersBtnEl.style.display = "none";
+            }
+        }
+
+        // Hàm đặt lại toàn bộ bộ lọc và tìm kiếm về trạng thái ban đầu
+        function resetAllFilters() {
+            searchInputEl.value = "";
+            searchQuery = "";
+            currentFilter = "all";
+            syncFilterButtonUI();
+            renderProjects();
+            updateClearButtonVisibility();
+            searchInputEl.focus();
         }
 
         function renderProjects() {
@@ -975,26 +992,37 @@
 
         searchInputEl.addEventListener("input", (e) => {
             searchQuery = e.target.value;
-            if (searchQuery.trim() !== "") {
-                clearSearchBtnEl.style.display = "flex";
-            } else {
-                clearSearchBtnEl.style.display = "none";
-            }
+            updateClearButtonVisibility();
             renderProjects();
         });
 
-        clearSearchBtnEl.addEventListener("click", () => {
-            searchInputEl.value = "";
-            searchQuery = "";
-            clearSearchBtnEl.style.display = "none";
-            renderProjects();
-            searchInputEl.focus();
+        clearFiltersBtnEl.addEventListener("click", () => {
+            resetAllFilters();
+        });
+
+        // Xử lý phím tắt ESC phân cấp thông minh
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                // Ưu tiên 1: Đóng bảng QR nếu đang mở
+                if (authorQrPanelEl && authorQrPanelEl.classList.contains("active")) {
+                    toggleQrPanel(false);
+                    avatarBoxEl.focus();
+                    return;
+                }
+                // Ưu tiên 2: Nếu có bộ lọc hoặc tìm kiếm đang hoạt động, xoá sạch toàn bộ
+                const hasSearch = searchQuery.trim() !== "";
+                const hasFilter = currentFilter !== "all";
+                if (hasSearch || hasFilter) {
+                    resetAllFilters();
+                }
+            }
         });
 
         // Khởi chạy ứng dụng an toàn trong khối try-catch, không dùng style inline
         try {
             renderFilters();
             renderProjects();
+            updateClearButtonVisibility();
         } catch (err) {
             console.error("Lỗi khởi chạy:", err);
             emptyResultsBoxEl.style.display = "flex";
