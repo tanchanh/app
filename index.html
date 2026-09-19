@@ -1,1042 +1,738 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ứng Dụng Web An Toàn - Dương Tấn Chánh</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh Thiếp - Dương Tấn Chánh | TIDA</title>
+  <meta name="description" content="Danh thiếp điện tử của Dương Tấn Chánh - TIDA. Liên hệ: 0913.150.370, Zalo, Email, Website app.tanchanh.workers.dev">
+  <meta property="og:title" content="Dương Tấn Chánh - TIDA">
+  <meta property="og:description" content="Liên hệ nhanh qua điện thoại, Zalo, Email và QR code">
+  <meta property="og:type" content="profile">
+  <meta name="theme-color" content="#021B35">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23021B35'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='16' fill='%23fff'%3ET%3C/text%3E%3C/svg%3E">
+  <link rel="canonical" href="https://app.tanchanh.workers.dev">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        :root {
-            --bg-dark: #000000;
-            --bg-surface: #1A1A1A;
-            --card-bg: #262626;
-            --text-light: #FFFFFF;
-            --text-muted: #CCCCCC;
-            --primary: #0066B6;
-            --secondary: #4020D0;
-            --highlight: #7FDD0F;
-            --success: #009911;
-            --warning: #EE6000;
-            --danger: #FF2040;
-            --border-subtle: #262626;
-            --border-visible: #CCCCCC;
-        }
+    :root {
+      --color-blue: #0066B6;
+      --color-purple: #4020D0;
+      --color-lime: #7FDD0F;
+      --color-green: #009911;
+      --color-orange: #EE6000;
+      --color-red: #FF2040;
+      --color-black: #000000;
+      --color-dark-1: #1A1A1A;
+      --color-dark-2: #262626;
+      --color-gray: #CCCCCC;
+      --color-white: #FFFFFF;
 
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-dark);
-            background-image:
-                radial-gradient(circle at 15% 15%, rgba(64, 32, 208, 0.4) 0%, transparent 45%),
-                radial-gradient(circle at 85% 85%, rgba(0, 102, 182, 0.35) 0%, transparent 45%);
-            background-repeat: no-repeat;
-            background-size: cover;
-            min-height: 100vh;
-            color: var(--text-light);
-            font-size: 1.2rem;
-            font-weight: normal;
-            max-width: 41.67rem;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0.5rem;
-            padding-bottom: 5rem;
-            line-height: 1.6;
-            word-break: normal;
-            overflow-wrap: break-word;
-        }
+      --theme-navy: #021B35;
+      --theme-brand-blue: #0066B6;
+      --theme-sky-blue: #8DBDF0;
+      --theme-grid-line: #E4EDF5;
+      --theme-outer-bg: #E6EDF5;
 
-        /* Phần đầu trang & Tác giả */
-        header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-            width: 100%;
-        }
+      --font-stack: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
 
-        .avatar-box {
-            position: relative;
-            margin-bottom: 1rem;
-            cursor: pointer;
-            outline: none;
-            user-select: none;
-        }
+    body {
+      font-family: var(--font-stack);
+      font-size: 1.1rem;
+      font-weight: normal;
+      background-color: var(--theme-outer-bg);
+      color: var(--theme-navy);
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100vh;
+      word-break: normal;
+      overflow-wrap: break-word;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        .avatar-image {
-            width: 6rem;
-            height: 6rem;
-            border-radius: 50%;
-            border: 3px solid var(--secondary);
-            background-color: var(--bg-surface);
-            box-shadow: 0 0 1.25rem rgba(64, 32, 208, 0.6);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            display: block;
-            object-fit: cover;
-        }
+    /* KHUNG THẺ ĐỊNH DANH (NỔI BẬT 3D TRÊN NỀN XÁM BẠC, GÓC VUÔNG 90 ĐỘ NGUYÊN BẢN) */
+    .id-card-container {
+      position: relative;
+      width: 100%;
+      max-width: 24.5rem;
+      background-color: var(--color-white);
+      box-shadow: 0 1rem 3rem rgba(2, 27, 53, 0.16);
+      margin: 0 auto;
+      overflow: clip;
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .avatar-box:hover .avatar-image,
-        .avatar-box:focus-visible .avatar-image {
-            transform: scale(1.08) rotate(4deg);
-            border-color: var(--highlight);
-            box-shadow: 0 0 1.5rem rgba(127, 221, 15, 0.6);
-        }
+    /* HỆ THỐNG LƯỚI NỀN Ô LỚN PHỦ TOÀN BỘ PHÍA SAU THẺ */
+    .svg-full-card-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        /* Khung hiển thị mã QR & Email liên hệ */
-        .author-qr-panel {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--bg-surface);
-            border: 2px solid var(--secondary);
-            border-radius: 0.8rem;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 0.25rem 1.5rem rgba(64, 32, 208, 0.4);
-            gap: 0.8rem;
-            width: 100%;
-            max-width: 18rem;
-        }
+    /* KHU VỰC ĐỈNH THẺ: KHÓA TỈ LỆ ASPECT-RATIO ĐỒNG DẠNG (CHỐNG MÉO HÌNH TUYỆT ĐỐI) */
+    .card-top-section {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 376 / 312;
+      height: auto;
+      background-color: transparent;
+      z-index: 1;
+    }
 
-        .author-qr-panel.active {
-            display: flex;
-        }
+    .svg-top-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+    }
 
-        .author-qr-panel svg {
-            width: 100%;
-            max-width: 13rem;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            border-radius: 0.4rem;
-        }
+    /* TÊN CÔNG TY TIDA: CỐ ĐỊNH 1.4rem */
+    .brand-container {
+      position: absolute;
+      top: 8%;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .author-qr-email-link {
-            color: var(--highlight);
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            word-break: break-all;
-            transition: color 0.2s ease, text-decoration 0.2s ease;
-        }
+    .brand-text {
+      font-size: 1.4rem;
+      font-weight: bold;
+      letter-spacing: 0.2rem;
+      color: var(--color-white);
+      text-transform: uppercase;
+    }
 
-        .author-qr-email-link:hover {
-            color: var(--text-light);
-            text-decoration: underline;
-        }
+    /* KHUNG ẢNH CHÂN DUNG CO GIÃN THEO TỈ LỆ % ĐỒNG BỘ VỚI ĐỈNH THẺ */
+    .hexagon-portrait-box {
+      position: absolute;
+      top: 25.6%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 47.87%;
+      height: 66.67%;
+      z-index: 3;
+    }
 
-        .author-qr-hint {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            font-weight: normal;
-        }
+    .hexagon-svg-border {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
 
-        h1 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
-            background: linear-gradient(135deg, var(--text-light) 0%, var(--highlight) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.2rem;
-            width: 100%;
-        }
+    .hexagon-image-clip {
+      position: absolute;
+      top: 3.8%;
+      left: 4.4%;
+      width: 91.2%;
+      height: 92.4%;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      background-color: var(--theme-navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      z-index: 1;
+    }
 
-        .author-line {
-            font-size: 1.2rem;
-            font-style: normal;
-            font-weight: bold;
-            text-align: right;
-            color: var(--highlight);
-            width: 100%;
-            margin-bottom: 0.8rem;
-        }
+    .user-avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-        .header-description {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            font-weight: normal;
-            text-align: center;
-            margin-bottom: 1rem;
-            width: 100%;
-        }
+    .avatar-fallback-icon {
+      width: 100%;
+      height: 100%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--theme-navy);
+    }
 
-        .stats-badge-box {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-color: var(--bg-surface);
-            border: 2px solid var(--border-subtle);
-            border-radius: 2rem;
-            padding: 0.5rem 1rem;
-            font-size: 1.2rem;
-            font-weight: normal;
-            box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.4);
-            margin-bottom: 1rem;
-        }
+    .avatar-fallback-icon svg {
+      width: 50%;
+      height: 50%;
+      fill: var(--theme-sky-blue);
+      opacity: 0.85;
+    }
 
-        .stats-badge-box .stat-highlight {
-            color: var(--highlight);
-            font-weight: bold;
-        }
+    /* PHẦN THÂN THẺ (PADDING-TOP: 0, ĐỆM ĐÁY 4.5rem CÁCH XA KHỐI QR) */
+    .card-body-section {
+      position: relative;
+      background-color: transparent;
+      padding: 0 1.25rem 4.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+    }
 
-        /* Khung điều khiển & Tìm kiếm */
-        .controls-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            width: 100%;
-        }
+    /* HỌ TÊN CHỦ THẺ: ÁP SÁT TRỰC TIẾP NGAY DƯỚI ẢNH ĐẠI DIỆN (-0.8rem), CỐ ĐỊNH 1.5rem */
+    .card-holder-name {
+      position: relative;
+      z-index: 1;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--theme-navy);
+      text-align: center;
+      margin-top: -0.8rem;
+      margin-bottom: 1.3rem;
+      letter-spacing: -0.01rem;
+    }
 
-        .search-field-box {
-            position: relative;
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
+    /* DANH SÁCH LIÊN HỆ ĐỒNG BỘ CĂN GIỮA HAI LỀ */
+    .contact-info-list {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.15rem;
+      width: 100%;
+    }
 
-        .search-field-input {
-            width: 100%;
-            background-color: var(--bg-surface);
-            border: 2px solid var(--border-subtle);
-            border-radius: 2rem;
-            padding: 0.8rem 1rem;
-            padding-left: 3rem;
-            padding-right: 7.5rem;
-            color: var(--text-light);
-            font-size: 1.2rem;
-            font-weight: normal;
-            font-family: inherit;
-            box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.3);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
+    .contact-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.3rem;
+      width: 100%;
+    }
 
-        .search-field-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 1rem rgba(0, 102, 182, 0.5);
-        }
+    /* TIÊU ĐỀ MỤC: FONT 1.1rem (CHỮ ĐẬM) */
+    .contact-block-label {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--theme-brand-blue);
+      letter-spacing: 0.02rem;
+    }
 
-        .search-icon-svg {
-            position: absolute;
-            left: 1rem;
-            width: 1.3rem;
-            height: 1.3rem;
-            stroke: var(--text-muted);
-            fill: none;
-            pointer-events: none;
-        }
+    /* HÀNG HIỂN THỊ CÙNG DÒNG "GIÁ TRỊ - QR CODE" */
+    .contact-inline-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
 
-        /* Nút Xoá Lọc to rõ, tiện dụng */
-        .clear-filters-button {
-            position: absolute;
-            right: 0.5rem;
-            background-color: var(--card-bg);
-            border: 2px solid var(--border-subtle);
-            color: var(--highlight);
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 0.3rem 0.8rem;
-            border-radius: 1.5rem;
-            font-size: 1.2rem;
-            font-weight: bold;
-            font-family: inherit;
-            transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-            user-select: none;
-        }
+    /* NỘI DUNG BÊN DƯỚI: FONT 1.1rem (CHỮ THƯỜNG) */
+    .contact-block-link {
+      font-size: 1.1rem;
+      font-style: normal;
+      font-weight: normal;
+      color: var(--theme-navy);
+      text-decoration: none;
+      word-break: break-all;
+      transition: color 0.15s;
+    }
 
-        .clear-filters-button:hover,
-        .clear-filters-button:focus-visible {
-            outline: none;
-            color: var(--text-light);
-            border-color: var(--danger);
-            background-color: var(--bg-surface);
-        }
+    .contact-block-link:hover, .contact-block-link:focus {
+      color: var(--theme-brand-blue);
+      text-decoration: underline;
+    }
 
-        /* Bộ lọc danh mục */
-        .filters-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-            width: 100%;
-        }
+    /* DẤU GẠCH NỐI " - " */
+    .contact-inline-separator {
+      font-size: 1.1rem;
+      font-style: normal;
+      font-weight: normal;
+      color: var(--theme-navy);
+      user-select: none;
+    }
 
-        .filter-pill-button {
-            background-color: var(--bg-surface);
-            border: 2px solid var(--border-subtle);
-            color: var(--text-muted);
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-size: 1.2rem;
-            font-weight: normal;
-            cursor: pointer;
-            font-family: inherit;
-            transition: all 0.25s ease;
-            user-select: none;
-        }
+    /* NÚT VĂN BẢN "QR Code" CHUẨN NGỮ NGHĨA */
+    .contact-qr-link {
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-style: normal;
+      font-weight: normal;
+      color: var(--theme-brand-blue);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      text-decoration: underline;
+      transition: color 0.15s;
+      display: inline-block;
+    }
 
-        .filter-pill-button:hover {
-            color: var(--text-light);
-            border-color: var(--primary);
-            transform: translateY(-0.1rem);
-        }
+    .contact-qr-link:hover, .contact-qr-link:focus {
+      color: var(--theme-navy);
+    }
 
-        .filter-pill-button.active {
-            color: var(--text-light);
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-color: transparent;
-            font-weight: bold;
-            box-shadow: 0 0.25rem 1rem rgba(64, 32, 208, 0.4);
-        }
+    /* ĐÁY THẺ */
+    .card-footer-section {
+      position: relative;
+      width: 100%;
+      height: 4.6rem;
+      background-color: transparent;
+      overflow: visible;
+      z-index: 2;
+    }
 
-        /* Danh sách thẻ dự án */
-        .project-items-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            width: 100%;
-        }
+    .svg-footer-ribbon {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+    }
 
-        .project-row-card {
-            position: relative;
-            background-color: var(--bg-surface);
-            border: 2px solid var(--border-subtle);
-            border-radius: 0.8rem;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-        }
+    /* NÚT QR CODE ĐÁY THẺ: MÃ WEBSITE LIÊN HỆ, NÂNG CAO LÊN BOTTOM: 1.8rem, VIỀN 6PX, PADDING 0, GÓC VUÔNG PHẲNG */
+    .qr-badge-button {
+      position: absolute;
+      right: 1.5rem;
+      bottom: 1.8rem;
+      width: 5.2rem;
+      height: 5.2rem;
+      aspect-ratio: 1 / 1;
+      background-color: var(--color-white);
+      border: 6px solid var(--theme-brand-blue);
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s, border-color 0.2s;
+      z-index: 5;
+    }
 
-        .project-row-card:hover {
-            border-color: var(--secondary);
-            transform: translateY(-0.15rem);
-            box-shadow: 0 0.375rem 1.25rem rgba(64, 32, 208, 0.25);
-        }
+    .qr-badge-button:hover {
+      transform: translateY(-4px);
+      border-color: var(--theme-sky-blue);
+    }
 
-        .project-card-header {
-            display: flex;
-            align-items: flex-start;
-            width: 100%;
-        }
+    .qr-code-svg-image {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      object-fit: contain;
+      pointer-events: none;
+    }
 
-        .project-direct-link {
-            display: inline-flex;
-            align-items: flex-start;
-            gap: 0.6rem;
-            text-decoration: none;
-            color: var(--text-light);
-            transition: color 0.2s ease;
-            width: 100%;
-        }
+    /* LỚP PHỦ POPUP: DÙNG DISPLAY: NONE / GRID, Z-INDEX CAO TUYỆT ĐỐI */
+    .qr-modal-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      background-color: rgba(2, 27, 53, 0.88);
+      z-index: 99999;
+      display: none;
+      place-items: center;
+      padding: 1rem;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
 
-        .project-direct-link:hover h2 {
-            color: var(--highlight);
-        }
+    .qr-modal-overlay.open {
+      display: grid;
+    }
 
-        .project-emoji-icon {
-            font-size: 1.3rem;
-            line-height: 1.3;
-            flex-shrink: 0;
-        }
+    /* KHUNG THẺ POPUP NẰM CHÍNH GIỮA MÀN HÌNH */
+    .qr-modal-card {
+      position: relative;
+      background-color: var(--color-white);
+      border: 4px solid var(--theme-brand-blue);
+      border-radius: 1.25rem;
+      padding: 1.25rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 1rem 3rem rgba(0,0,0,0.3);
+      width: min(90vw, 20rem);
+      margin: auto;
+      box-sizing: border-box;
+    }
 
-        h2.project-heading {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: inherit;
-            transition: color 0.2s ease;
-            line-height: 1.4;
-            word-break: break-word;
-        }
+    /* NÚT ĐÓNG CHUẨN 44px (2.75rem) DỄ BẤM */
+    .qr-modal-close-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 50%;
+      border: 2px solid var(--theme-brand-blue);
+      background-color: var(--theme-navy);
+      color: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: background-color 0.2s, transform 0.15s;
+    }
 
-        .project-description-text {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            font-weight: normal;
-            line-height: 1.6;
-            word-break: break-word;
-        }
+    .qr-modal-close-btn:hover {
+      background-color: var(--color-red);
+      transform: scale(1.08);
+    }
 
-        /* Dòng thông tin meta */
-        .project-meta-info {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.5rem;
-            font-size: 1.2rem;
-            font-weight: normal;
-            color: var(--text-muted);
-            border-top: 2px solid var(--card-bg);
-            padding-top: 0.5rem;
-            margin-top: 0.3rem;
-        }
+    .qr-modal-close-btn svg {
+      width: 1.4rem;
+      height: 1.4rem;
+      stroke: currentColor;
+    }
 
-        .project-category-badge {
-            background-color: var(--card-bg);
-            border: 2px solid var(--border-subtle);
-            color: var(--highlight);
-            padding: 0.3rem 0.8rem;
-            border-radius: 1rem;
-            font-size: 1.2rem;
-            font-weight: bold;
-            word-break: normal;
-        }
+    /* TIÊU ĐỀ POPUP */
+    .qr-modal-title {
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: var(--theme-navy);
+      margin-top: 0.25rem;
+      margin-bottom: 0.75rem;
+      text-align: center;
+      white-space: nowrap;
+    }
 
-        /* Trạng thái trống (Không có kết quả) */
-        .empty-results-box {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 1rem;
-            background-color: var(--bg-surface);
-            border: 2px solid var(--border-subtle);
-            border-radius: 0.8rem;
-            color: var(--text-muted);
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
+    /* KHUNG CHỨA QR DÙNG CHUNG CO DÃN ĐA CHIỀU (CHỐNG TRÀN) */
+    .qr-modal-image-wrapper {
+      width: min(68vw, 45vh, 14rem);
+      height: min(68vw, 45vh, 14rem);
+      aspect-ratio: 1 / 1;
+      background-color: var(--color-white);
+      padding: 0.4rem;
+      border: 2px solid var(--theme-grid-line);
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
 
-        .empty-results-box svg {
-            width: 3.5rem;
-            height: 3.5rem;
-            stroke: var(--warning);
-            fill: none;
-        }
+    .qr-modal-image-wrapper svg {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      object-fit: contain;
+    }
 
-        .empty-results-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--text-light);
-        }
+    .qr-modal-action-link {
+      font-size: 1.15rem;
+      font-style: normal;
+      font-weight: bold;
+      color: var(--theme-brand-blue);
+      text-decoration: none;
+      margin-top: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.15s;
+    }
 
-        .empty-results-box p {
-            font-size: 1.2rem;
-            font-weight: normal;
-        }
+    .qr-modal-action-link:hover {
+      text-decoration: underline;
+      color: var(--theme-navy);
+    }
 
-        .system-error-text {
-            color: var(--danger);
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        /* Chân trang */
-        footer {
-            margin-top: 3rem;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: normal;
-            color: var(--text-muted);
-            border-top: 2px solid var(--bg-surface);
-            padding-top: 1rem;
-            width: 100%;
-        }
-    </style>
+    .qr-modal-hint {
+      font-size: 0.85rem;
+      color: #666666;
+      margin-top: 0.2rem;
+      text-align: center;
+    }
+  </style>
 </head>
-
 <body>
+  <!-- QR TEMPLATES - 1 NGUON DUY NHAT, KHONG DUPLICATE -->
+  <template id="qr-phone"><svg viewBox="0 0 25 25" aria-hidden="true"><path d="M2 2h7v1h-7z M10 2h1v1h-1z M12 2h2v1h-2z M16 2h7v1h-7z M2 3h1v6h-1z M8 3h1v6h-1z M11 3h1v4h-1z M13 3h2v2h-2z M16 3h1v6h-1z M22 3h1v6h-1z M4 4h3v3h-3z M10 4h1v1h-1z M12 4h1v1h-1z M18 4h3v3h-3z M14 5h1v2h-1z M12 6h1v1h-1z M10 7h1v2h-1z M3 8h5v1h-5z M12 8h1v3h-1z M14 8h1v1h-1z M17 8h5v1h-5z M11 9h1v1h-1z M13 9h1v2h-1z M2 10h1v1h-1z M4 10h1v1h-1z M8 10h2v1h-2z M14 10h1v1h-1z M17 10h1v1h-1z M20 10h1v1h-1z M22 10h1v5h-1z M3 11h1v2h-1z M7 11h1v2h-1z M11 11h1v3h-1z M15 11h1v4h-1z M19 11h1v1h-1z M21 11h1v1h-1z M4 12h1v3h-1z M6 12h1v3h-1z M8 12h3v1h-3z M17 12h2v1h-2z M2 13h1v1h-1z M10 13h1v1h-1z M12 13h1v4h-1z M14 13h1v1h-1z M20 13h1v1h-1z M8 14h2v1h-2z M16 14h3v1h-3z M21 14h1v2h-1z M10 15h2v2h-2z M17 15h2v2h-2z M20 15h1v1h-1z M2 16h7v1h-7z M13 16h4v1h-4z M22 16h1v1h-1z M2 17h1v6h-1z M8 17h1v6h-1z M11 17h1v2h-1z M19 17h2v2h-2z M4 18h3v3h-3z M13 18h5v1h-5z M21 18h1v1h-1z M15 19h2v2h-2z M18 19h2v1h-2z M10 20h4v1h-4z M19 20h4v1h-4z M13 21h1v1h-1z M16 21h2v1h-2z M22 21h1v2h-1z M3 22h5v1h-5z M10 22h3v1h-3z M16 22h1v1h-1z M18 22h4v1h-4z"/></svg></template>
+  <template id="qr-zalo"><svg viewBox="0 0 33 33" aria-hidden="true"><path d="M2 2h7v1h-7z M10 2h4v2h-4z M16 2h1v3h-1z M18 2h1v1h-1z M24 2h7v1h-7z M2 3h1v6h-1z M8 3h1v6h-1z M15 3h1v2h-1z M20 3h1v3h-1z M24 3h1v6h-1z M30 3h1v6h-1z M4 4h3v3h-3z M13 4h2v2h-2z M17 4h1v2h-1z M22 4h1v2h-1z M26 4h3v3h-3z M10 5h2v1h-2z M19 5h1v3h-1z M11 6h1v1h-1z M16 6h1v4h-1z M21 6h1v1h-1z M12 7h1v4h-1z M14 7h1v2h-1z M3 8h5v1h-5z M10 8h1v2h-1z M18 8h1v2h-1z M20 8h1v1h-1z M22 8h1v7h-1z M25 8h5v1h-5z M15 9h1v2h-1z M17 9h1v1h-1z M21 9h1v2h-1z M2 10h1v1h-1z M4 10h2v1h-2z M7 10h3v1h-3z M11 10h1v3h-1z M13 10h1v1h-1z M19 10h2v1h-2z M24 10h1v1h-1z M27 10h1v3h-1z M29 10h2v1h-2z M3 11h1v1h-1z M5 11h1v3h-1z M17 11h2v1h-2z M23 11h1v2h-1z M25 11h1v5h-1z M29 11h1v3h-1z M2 12h1v1h-1z M6 12h3v1h-3z M12 12h1v2h-1z M14 12h1v1h-1z M16 12h1v1h-1z M18 12h1v1h-1z M20 12h2v1h-2z M26 12h1v1h-1z M3 13h2v2h-2z M9 13h2v1h-2z M13 13h1v5h-1z M15 13h1v1h-1z M17 13h1v2h-1z M20 13h1v2h-1z M7 14h3v1h-3z M14 14h1v2h-1z M24 14h1v4h-1z M26 14h1v1h-1z M2 15h2v1h-2z M5 15h3v1h-3z M12 15h1v1h-1z M15 15h2v1h-2z M18 15h2v3h-2z M21 15h1v1h-1z M23 15h1v3h-1z M27 15h2v1h-2z M3 16h2v1h-2z M6 16h1v1h-1z M8 16h2v1h-2z M16 16h2v1h-2z M26 16h1v4h-1z M28 16h1v1h-1z M2 17h2v1h-2z M7 17h1v2h-1z M11 17h2v1h-2z M15 17h1v1h-1z M20 17h3v1h-3z M25 17h1v2h-1z M29 17h2v1h-2z M2 18h1v1h-1z M5 18h2v1h-2z M8 18h3v1h-3z M14 18h1v1h-1z M18 18h1v1h-1z M20 18h1v2h-1z M28 18h2v1h-2z M4 19h2v1h-2z M9 19h1v3h-1z M11 19h2v1h-2z M15 19h1v1h-1z M23 19h2v1h-2z M29 19h2v1h-2z M2 20h1v1h-1z M5 20h1v3h-1z M7 20h2v1h-2z M11 20h1v3h-1z M13 20h2v2h-2z M17 20h1v2h-1z M19 20h1v2h-1z M25 20h1v1h-1z M27 20h2v1h-2z M12 21h1v1h-1z M18 21h1v3h-1z M20 21h2v1h-2z M23 21h2v2h-2z M28 21h1v2h-1z M30 21h1v2h-1z M3 22h1v1h-1z M7 22h2v1h-2z M10 22h1v4h-1z M14 22h2v3h-2z M21 22h2v1h-2z M25 22h2v1h-2z M16 23h1v1h-1z M22 23h1v4h-1z M26 23h1v6h-1z M29 23h1v2h-1z M2 24h7v1h-7z M10 24h1v2h-1z M16 24h1v2h-1z M18 24h1v1h-1z M24 24h1v1h-1z M27 24h1v2h-1z M2 25h1v6h-1z M8 25h1v6h-1z M11 25h3v1h-3z M28 25h1v5h-1z M4 26h3v3h-3z M11 26h1v1h-1z M14 26h1v1h-1z M16 26h1v2h-1z M18 26h1v1h-1z M20 26h2v1h-2z M23 26h3v1h-3z M29 26h2v1h-2z M10 27h1v2h-1z M12 27h2v1h-2z M19 27h2v3h-2z M29 27h1v1h-1z M12 28h1v1h-1z M17 28h2v1h-2z M21 28h1v1h-1z M24 28h2v1h-2z M27 28h1v3h-1z M30 28h1v2h-1z M13 29h4v1h-4z M18 29h1v1h-1z M3 30h5v1h-5z M10 30h1v1h-1z M15 30h1v1h-1z M22 30h4v1h-4z M29 30h1v1h-1z"/></svg></template>
+  <template id="qr-contact"><svg viewBox="0 0 33 33" aria-hidden="true"><path d="M2 2h7v1h-7z M13 2h1v1h-1z M16 2h3v1h-3z M20 2h1v1h-1z M24 2h7v1h-7z M2 3h1v6h-1z M8 3h1v6h-1z M11 3h1v1h-1z M14 3h4v1h-4z M19 3h1v1h-1z M21 3h1v2h-1z M24 3h1v6h-1z M30 3h1v6h-1z M4 4h3v3h-3z M10 4h1v6h-1z M14 4h1v1h-1z M16 4h1v2h-1z M18 4h1v1h-1z M20 4h1v2h-1z M22 4h1v2h-1z M26 4h3v3h-3z M11 5h1v2h-1z M13 5h1v1h-1z M15 5h1v1h-1z M17 5h1v3h-1z M14 6h1v4h-1z M18 6h1v1h-1z M21 6h1v1h-1z M12 7h2v1h-2z M19 7h1v1h-1z M3 8h5v1h-5z M12 8h1v1h-1z M16 8h1v1h-1z M18 8h1v2h-1z M20 8h1v2h-1z M22 8h1v2h-1z M25 8h5v1h-5z M13 9h1v4h-1z M19 9h1v2h-1z M21 9h1v1h-1z M2 10h1v3h-1z M4 10h5v1h-5z M11 10h2v1h-2z M17 10h1v1h-1z M24 10h5v1h-5z M3 11h4v1h-4z M9 11h1v3h-1z M15 11h1v3h-1z M18 11h1v1h-1z M20 11h3v1h-3z M25 11h3v1h-3z M29 11h1v1h-1z M3 12h1v8h-1z M6 12h3v1h-3z M10 12h3v1h-3z M16 12h1v1h-1z M19 12h1v2h-1z M21 12h1v2h-1z M27 12h2v1h-2z M5 13h2v1h-2z M11 13h1v1h-1z M14 13h1v3h-1z M20 13h1v5h-1z M22 13h6v1h-6z M30 13h1v1h-1z M4 14h1v6h-1z M6 14h3v1h-3z M13 14h1v3h-1z M16 14h3v1h-3z M22 14h1v1h-1z M24 14h3v1h-3z M2 15h1v8h-1z M6 15h2v1h-2z M23 15h2v1h-2z M27 15h1v2h-1z M29 15h1v3h-1z M8 16h1v1h-1z M10 16h3v1h-3z M17 16h3v1h-3z M23 16h1v2h-1z M28 16h1v1h-1z M30 16h1v2h-1z M5 17h1v1h-1z M7 17h1v2h-1z M9 17h3v1h-3z M16 17h1v1h-1z M18 17h2v1h-2z M21 17h2v1h-2z M24 17h3v1h-3z M8 18h1v1h-1z M10 18h3v1h-3z M17 18h1v1h-1z M19 18h1v1h-1z M24 18h1v1h-1z M26 18h1v1h-1z M5 19h1v2h-1z M9 19h1v1h-1z M11 19h6v1h-6z M20 19h1v1h-1z M22 19h1v9h-1z M25 19h1v1h-1z M27 19h1v2h-1z M29 19h1v1h-1z M6 20h3v1h-3z M10 20h1v4h-1z M15 20h5v1h-5z M28 20h1v1h-1z M4 21h1v2h-1z M9 21h1v2h-1z M12 21h1v1h-1z M14 21h2v1h-2z M18 21h1v3h-1z M21 21h1v1h-1z M23 21h4v2h-4z M29 21h2v1h-2z M6 22h1v1h-1z M8 22h1v1h-1z M13 22h1v2h-1z M16 22h2v1h-2z M19 22h1v1h-1z M27 22h3v1h-3z M12 23h1v2h-1z M17 23h1v2h-1z M26 23h1v4h-1z M29 23h1v1h-1z M2 24h7v1h-7z M14 24h1v1h-1z M19 24h1v3h-1z M21 24h1v3h-1z M24 24h1v1h-1z M27 24h2v1h-2z M2 25h1v6h-1z M8 25h1v6h-1z M10 25h2v1h-2z M13 25h1v1h-1z M16 25h1v1h-1z M18 25h1v2h-1z M20 25h1v1h-1z M28 25h3v2h-3z M4 26h3v3h-3z M10 26h1v3h-1z M12 26h1v2h-1z M14 26h1v2h-1z M17 26h1v1h-1z M23 26h3v2h-3z M13 27h1v2h-1z M16 27h1v1h-1z M19 28h1v1h-1z M23 28h1v1h-1z M25 28h1v1h-1z M28 28h2v1h-2z M12 29h1v1h-1z M18 29h1v1h-1z M21 29h1v2h-1z M27 29h2v2h-2z M30 29h1v1h-1z M3 30h5v1h-5z M10 30h2v1h-2z M15 30h1v1h-1z M17 30h1v1h-1z M19 30h2v1h-2z M23 30h2v1h-2z M26 30h1v1h-1z"/></svg></template>
 
-    <header>
-        <div class="avatar-box" id="avatar-box" role="button" tabindex="0" title="Bấm để xem mã QR liên hệ" aria-label="Bấm để xem mã QR liên hệ" aria-expanded="false">
-            <img src="images/author.jpg" alt="Dương Tấn Chánh Avatar" class="avatar-image" id="avatar-image">
-        </div>
-        <div class="author-qr-panel" id="author-qr-panel" role="region" aria-label="Thông tin liên hệ QR"></div>
-        <h1>ỨNG DỤNG WEB AN TOÀN</h1>
-        <div class="author-line">Dương Tấn Chánh</div>
-        <p class="header-description">Bộ sưu tập các ứng dụng web nhỏ gọn, công cụ tiện ích và sản phẩm mã hoá bảo mật chạy trực tiếp trên trình duyệt.</p>
-        <div class="stats-badge-box">
-            <span>Tổng số ứng dụng hiển thị:</span>
-            <span class="stat-highlight" id="total-count">0</span>
-        </div>
-    </header>
 
-    <section class="controls-wrapper" aria-label="Khu vực tìm kiếm và bộ lọc">
-        <div class="search-field-box">
-            <svg class="search-icon-svg" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+
+  <!-- TOÀN BỘ KHUNG THẺ ĐỊNH DANH (NỔI BẬT 3D TRÊN NỀN XÁM BẠC) -->
+  <main class="id-card-container" aria-label="Danh thiếp Dương Tấn Chánh">
+    
+    <!-- LỚP HỌA TIẾT LƯỚI PHỦ KÍN 100% NỀN THẺ -->
+    <svg class="svg-full-card-grid" width="100%" height="100%">
+      <defs>
+        <pattern id="card-global-grid" width="42" height="42" patternUnits="userSpaceOnUse">
+          <path d="M 42 0 L 0 0 0 42" fill="none" stroke="#E4EDF5" stroke-width="2"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#card-global-grid)"/>
+    </svg>
+
+    <!-- ĐỈNH THẺ: DẢI XIÊN CẮT CHÍNH GIỮA CẠNH ĐỨNG LỤC GIÁC TỶ LỆ 1:1, SONG SONG 30° TUYỆT ĐỐI -->
+    <div class="card-top-section">
+      <svg class="svg-top-backdrop" viewBox="0 0 376 312">
+        <!-- 1. Mảng xanh Navy chạm đỉnh trên cùng, dốc 30° song song -->
+        <path d="M 0 0 L 376 0 L 376 107 L 188 215.5 L 0 107 Z" fill="#021B35"/>
+
+        <!-- 2. Hệ thống chấm ma trận: Giữ tròn xoe 100% trên mọi kích thước màn hình -->
+        <!-- Bên trái (8 chấm) -->
+        <circle cx="34" cy="20" r="2.5" fill="#FFFFFF"/>
+        <circle cx="54" cy="20" r="2.5" fill="#FFFFFF"/>
+        <circle cx="34" cy="34" r="2.5" fill="#FFFFFF"/>
+        <circle cx="54" cy="34" r="2.5" fill="#FFFFFF"/>
+        <circle cx="34" cy="48" r="2.5" fill="#FFFFFF"/>
+        <circle cx="54" cy="48" r="2.5" fill="#FFFFFF"/>
+        <circle cx="34" cy="62" r="2.5" fill="#FFFFFF"/>
+        <circle cx="54" cy="62" r="2.5" fill="#FFFFFF"/>
+
+        <!-- Bên phải (8 chấm) -->
+        <circle cx="322" cy="20" r="2.5" fill="#FFFFFF"/>
+        <circle cx="342" cy="20" r="2.5" fill="#FFFFFF"/>
+        <circle cx="322" cy="34" r="2.5" fill="#FFFFFF"/>
+        <circle cx="342" cy="34" r="2.5" fill="#FFFFFF"/>
+        <circle cx="322" cy="48" r="2.5" fill="#FFFFFF"/>
+        <circle cx="342" cy="48" r="2.5" fill="#FFFFFF"/>
+        <circle cx="322" cy="62" r="2.5" fill="#FFFFFF"/>
+        <circle cx="342" cy="62" r="2.5" fill="#FFFFFF"/>
+
+        <!-- 3. Đường xanh đậm song song mảnh (10px) vát góc 30° -->
+        <path d="M 0 107 L 188 215.5 L 376 107 L 376 117 L 188 225.5 L 0 117 Z" fill="#0066B6"/>
+
+        <!-- 4. Dải xanh lợt bản rộng (32px) vát góc 30° song song tuyệt đối với cạnh dưới lục giác -->
+        <path d="M 0 117 L 188 225.5 L 376 117 L 376 149 L 188 257.5 L 0 149 Z" fill="#8DBDF0"/>
+      </svg>
+
+      <!-- TÊN CÔNG TY TIDA -->
+      <div class="brand-container">
+        <span class="brand-text">TIDA</span>
+      </div>
+
+      <!-- KHUNG ẢNH CHÂN DUNG LỤC GIÁC (CO GIÃN TỈ LỆ 1:1 ĐỒNG BỘ VỚI ĐỈNH THẺ) -->
+      <div class="hexagon-portrait-box">
+        
+        <!-- Khối chứa ảnh chân dung đường dẫn cục bộ -->
+        <div class="hexagon-image-clip">
+          <img 
+            id="avatar-image-element"
+            class="user-avatar-img"
+            src="images/author.jpg"
+            loading="lazy"
+            decoding="async"
+            width="180" height="208" 
+            alt="Chân dung Dương Tấn Chánh"
+          >
+
+          <!-- Ảnh vector dự phòng khi chưa có ảnh hoặc lỗi đường dẫn -->
+          <div class="avatar-fallback-icon" id="avatar-svg-box">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
             </svg>
-            <input type="text" id="search-input" class="search-field-input" placeholder="Tìm kiếm công cụ hoặc tính năng..." autocomplete="off" aria-label="Tìm kiếm ứng dụng">
-            <button id="clear-filters-btn" class="clear-filters-button" title="Xoá toàn bộ lọc và tìm kiếm (ESC)" aria-label="Xoá toàn bộ lọc và tìm kiếm (ESC)">
-                ✕ Xoá Lọc
-            </button>
+          </div>
         </div>
 
-        <nav class="filters-container" id="filters-container" aria-label="Bộ lọc danh mục"></nav>
-    </section>
-
-    <main class="project-items-list" id="project-items-list" aria-live="polite"></main>
-
-    <div class="empty-results-box" id="empty-results-box" role="status">
-        <svg stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        <!-- VIỀN LỤC GIÁC: NGOÀI XANH (8px), TRONG ĐEN (6px) -->
+        <svg class="hexagon-svg-border" viewBox="0 0 180 208">
+          <!-- 1. Viền xanh ngoài -->
+          <polygon points="90,8 173,56 173,152 90,200 7,152 7,56" fill="none" stroke="#0066B6" stroke-width="8" stroke-linejoin="round"/>
+          <!-- 2. Viền đen trong -->
+          <polygon points="90,14 167,58 167,150 90,194 13,150 13,58" fill="none" stroke="#021B35" stroke-width="6" stroke-linejoin="round"/>
         </svg>
-        <div class="empty-results-title">Không tìm thấy kết quả</div>
-        <p>Hãy thử tìm kiếm với từ khoá khác hoặc chọn bộ lọc khác.</p>
+
+      </div>
+
     </div>
 
-    <footer>
-        <p>Bản quyền thiết kế &copy; 2026 bởi Dương Tấn Chánh.</p>
-    </footer>
+    <!-- PHẦN THÂN THẺ (PADDING-TOP: 0, ĐỆM ĐÁY 4.5rem CÁCH XA KHỐI QR) -->
+    <div class="card-body-section">
+      
+      <!-- HỌ TÊN CHỦ THẺ: ÁP SÁT NGAY DƯỚI ĐỈNH NHỌN ẢNH ĐẠI DIỆN -->
+      <h1 class="card-holder-name">Dương Tấn Chánh</h1>
 
-    <script>
-        // HẰNG SỐ MÃ QR & EMAIL TÁC GIẢ
-        const AUTHOR_QR_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" width="350" height="350" aria-label="Mã QR liên hệ"><rect x="0" y="0" width="33" height="33" fill="#ffffff"/><path d="M2,2h7v1h-7z M10,2h1v2h-1z M13,2h2v1h-2z M17,2h2v1h-2z M22,2h1v4h-1z M24,2h7v1h-7z M2,3h1v6h-1z M8,3h1v6h-1z M11,3h1v1h-1z M13,3h1v1h-1z M16,3h2v2h-2z M20,3h1v1h-1z M24,3h1v6h-1z M30,3h1v6h-1z M4,4h3v3h-3z M14,4h2v1h-2z M26,4h3v3h-3z M10,5h2v1h-2z M13,5h2v1h-2z M18,5h1v1h-1z M20,5h1v5h-1z M15,6h1v1h-1z M19,6h1v2h-1z M12,7h1v2h-1z M16,7h1v4h-1z M21,7h1v1h-1z M3,8h5v1h-5z M10,8h1v2h-1z M14,8h1v1h-1z M18,8h1v1h-1z M22,8h1v1h-1z M25,8h5v1h-5z M15,9h1v2h-1z M19,9h1v2h-1z M21,9h1v2h-1z M2,10h1v4h-1z M4,10h2v1h-2z M7,10h3v1h-3z M11,10h1v4h-1z M18,10h1v2h-1z M24,10h1v2h-1z M27,10h1v2h-1z M29,10h2v1h-2z M3,11h1v1h-1z M5,11h3v1h-3z M9,11h1v2h-1z M12,11h1v1h-1z M17,11h1v3h-1z M22,11h2v3h-2z M26,11h1v2h-1z M29,11h1v1h-1z M6,12h1v1h-1z M8,12h1v1h-1z M14,12h1v4h-1z M16,12h1v2h-1z M21,12h1v1h-1z M30,12h1v1h-1z M3,13h3v1h-3z M7,13h1v1h-1z M13,13h1v3h-1z M15,13h1v1h-1z M19,13h1v4h-1z M25,13h1v3h-1z M27,13h1v5h-1z M3,14h1v4h-1z M8,14h2v1h-2z M12,14h1v2h-1z M18,14h1v1h-1z M22,14h1v2h-1z M26,14h1v5h-1z M9,15h2v1h-2z M15,15h1v1h-1z M28,15h3v1h-3z M2,16h1v1h-1z M4,16h1v1h-1z M6,16h3v1h-3z M11,16h1v2h-1z M16,16h1v1h-1z M20,16h2v2h-2z M23,16h2v2h-2z M28,16h1v2h-1z M30,16h1v2h-1z M5,17h1v1h-1z M9,17h1v3h-1z M12,17h2v2h-2z M15,17h1v1h-1z M17,17h1v1h-1z M22,17h1v2h-1z M25,17h1v2h-1z M29,17h1v5h-1z M4,18h1v1h-1z M8,18h1v1h-1z M10,18h1v2h-1z M24,18h1v2h-1z M3,19h1v1h-1z M6,19h1v2h-1z M11,19h1v1h-1z M15,19h1v1h-1z M20,19h2v1h-2z M2,20h1v1h-1z M4,20h2v1h-2z M7,20h2v1h-2z M12,20h3v1h-3z M19,20h1v1h-1z M23,20h1v3h-1z M28,20h1v1h-1z M30,20h1v1h-1z M4,21h1v2h-1z M10,21h2v1h-2z M14,21h1v4h-1z M17,21h2v1h-2z M24,21h1v2h-1z M3,22h1v1h-1z M8,22h1v1h-1z M12,22h1v1h-1z M15,22h1v3h-1z M17,22h1v2h-1z M19,22h4v1h-4z M25,22h3v1h-3z M30,22h1v1h-1z M10,23h1v3h-1z M13,23h1v1h-1z M16,23h1v1h-1z M22,23h1v4h-1z M26,23h1v4h-1z M29,23h1v2h-1z M2,24h7v1h-7z M11,24h1v3h-1z M18,24h1v2h-1z M20,24h2v1h-2z M24,24h1v1h-1z M2,25h1v6h-1z M8,25h1v6h-1z M13,25h1v1h-1z M19,25h1v1h-1z M28,25h1v4h-1z M4,26h3v3h-3z M12,26h1v1h-1z M14,26h1v1h-1z M16,26h2v1h-2z M23,26h3v1h-3z M29,26h2v1h-2z M10,27h1v2h-1z M15,27h2v1h-2z M18,27h4v1h-4z M27,27h1v1h-1z M29,27h1v1h-1z M11,28h5v1h-5z M17,28h2v1h-2z M21,28h1v1h-1z M24,28h2v1h-2z M30,28h1v2h-1z M12,29h3v1h-3z M16,29h1v2h-1z M18,29h1v1h-1z M20,29h1v1h-1z M22,29h2v2h-2z M3,30h5v1h-5z M10,30h2v1h-2z M14,30h2v1h-2z M17,30h1v1h-1z M19,30h1v1h-1z M24,30h1v1h-1z M29,30h1v1h-1z" fill="#000000" shape-rendering="crispEdges"/></svg>`;
-        const AUTHOR_EMAIL = "chanh.rebirth026@aleeas.com";
+      <!-- DANH SÁCH LIÊN HỆ: ĐIỆN THOẠI -> ZALO -> EMAIL -> WEBSITE -->
+      <div class="contact-info-list">
+        
+        <!-- 1. ĐIỆN THOẠI: "0913.150.370  -  QR Code" -->
+        <div class="contact-block">
+          <span class="contact-block-label">Điện thoại:</span>
+          <div class="contact-inline-row">
+            <a href="tel:0913150370" class="contact-block-link" title="Gọi đến số 0913.150.370">0913.150.370</a>
+            <span class="contact-inline-separator">-</span>
+            <button type="button" class="contact-qr-link" data-qr="phone" title="Bấm để xem mã QR Điện thoại">QR Code</button>
+          </div>
+        </div>
 
-        // Xử lý chống vỡ ảnh tác giả (Fallback an toàn sang SVG vector khi offline)
-        const avatarImageEl = document.getElementById("avatar-image");
-        if (avatarImageEl) {
-            avatarImageEl.addEventListener("error", () => {
-                avatarImageEl.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%234020D0"><rect width="100" height="100" fill="%231A1A1A"/><text x="50%" y="55%" font-size="35" fill="%237FDD0F" font-family="sans-serif" text-anchor="middle" dominant-baseline="middle">DTC</text></svg>`;
-            });
-        }
+        <!-- 2. ZALO: "Mở Zalo  -  QR Code" -->
+        <div class="contact-block">
+          <span class="contact-block-label">Zalo:</span>
+          <div class="contact-inline-row">
+            <a href="https://zaloapp.com/qr/p/qajinelupg0h" target="_blank" rel="noopener noreferrer" class="contact-block-link" title="Mở liên kết Zalo (Mở tab mới)">Mở Zalo</a>
+            <span class="contact-inline-separator">-</span>
+            <button type="button" class="contact-qr-link" data-qr="zalo" title="Bấm để xem mã QR Zalo">QR Code</button>
+          </div>
+        </div>
 
-        // Khởi tạo bảng hiển thị QR & Email từ hằng số
-        const avatarBoxEl = document.getElementById("avatar-box");
-        const authorQrPanelEl = document.getElementById("author-qr-panel");
+        <!-- 3. EMAIL (MỞ CỬA SỔ MỚI) -->
+        <div class="contact-block">
+          <span class="contact-block-label">Email:</span>
+          <a href="mailto:chanh.rebirth026@aleeas.com" class="contact-block-link" title="Gửi thư đến chanh.rebirth026@aleeas.com (Mở tab mới)">chanh.rebirth026@aleeas.com</a>
+        </div>
 
-        if (authorQrPanelEl) {
-            authorQrPanelEl.innerHTML = `
-                ${AUTHOR_QR_SVG}
-                <a href="mailto:${AUTHOR_EMAIL}" class="author-qr-email-link">${AUTHOR_EMAIL}</a>
-                <span class="author-qr-hint">(Bấm ra ngoài hoặc nhấn ESC để đóng)</span>
-            `;
-        }
+        <!-- 4. WEBSITE (CHỈ CÒN DUY NHẤT 1 WEBSITE, MỞ CỬA SỔ MỚI) -->
+        <div class="contact-block">
+          <span class="contact-block-label">Website:</span>
+          <a href="https://app.tanchanh.workers.dev" target="_blank" rel="noopener noreferrer" class="contact-block-link" title="Truy cập website https://app.tanchanh.workers.dev (Mở tab mới)">app.tanchanh.workers.dev</a>
+        </div>
 
-        function toggleQrPanel(show) {
-            if (!authorQrPanelEl) return;
-            const willShow = (typeof show === "boolean") ? show : !authorQrPanelEl.classList.contains("active");
-            if (willShow) {
-                authorQrPanelEl.classList.add("active");
-                if (avatarBoxEl) avatarBoxEl.setAttribute("aria-expanded", "true");
-            } else {
-                authorQrPanelEl.classList.remove("active");
-                if (avatarBoxEl) avatarBoxEl.setAttribute("aria-expanded", "false");
-            }
-        }
+      </div>
 
-        if (avatarBoxEl) {
-            avatarBoxEl.addEventListener("click", (e) => {
-                e.stopPropagation();
-                toggleQrPanel();
-            });
-            avatarBoxEl.addEventListener("keydown", (e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    toggleQrPanel();
-                }
-            });
-        }
+    </div>
 
-        // Tương tác bấm ra ngoài (Click outside) để đóng QR
-        document.addEventListener("click", (e) => {
-            if (authorQrPanelEl && authorQrPanelEl.classList.contains("active")) {
-                if (!authorQrPanelEl.contains(e.target) && !avatarBoxEl.contains(e.target)) {
-                    toggleQrPanel(false);
-                }
-            }
+    <!-- ĐÁY THẺ (RUY BĂNG & NÚT BẤM PHÓNG TO MÃ QR WEBSITE LIÊN HỆ) -->
+    <div class="card-footer-section">
+      <svg class="svg-footer-ribbon" viewBox="0 0 376 74" preserveAspectRatio="none">
+        <!-- 1. Dải xanh lợt bản rộng (16px) -->
+        <rect y="0" width="376" height="16" fill="#8DBDF0"/>
+        <!-- 2. Đường xanh đậm mảnh song song (8px) -->
+        <rect y="16" width="376" height="8" fill="#0066B6"/>
+        <!-- 3. Khối xanh Navy đáy thẻ -->
+        <rect y="24" width="376" height="50" fill="#021B35"/>
+      </svg>
+
+      <!-- NÚT QR CODE GÓC THẺ: ĐÃ CẬP NHẬT TIÊU ĐỀ THUẦN TÚY "Bấm để phóng to mã QR" -->
+      <button type="button" class="qr-badge-button" id="btn-footer-qr" aria-label="Bấm để phóng to mã QR" title="Bấm để phóng to mã QR">
+        <span id="footer-qr-mount" class="qr-code-svg-image"></span>
+      </button>
+
+    </div>
+
+  </main>
+
+  <!-- BẢNG PHÓNG TO MÃ QR DÙNG CHUNG (CĂN GIỮA TUYỆT ĐỐI, Z-INDEX CAO NHẤT) -->
+  <div class="qr-modal-overlay" id="qr-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-qr-title">
+    <div class="qr-modal-card" id="qr-modal-card-box">
+      <button type="button" class="qr-modal-close-btn" id="btn-close-qr" aria-label="Đóng bảng mã QR">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- TIÊU ĐỀ TỰ ĐỘNG THAY ĐỔI THEO LOẠI QR -->
+      <div class="qr-modal-title" id="modal-qr-title">Mã QR</div>
+
+      <!-- KHUNG CHỨA QR CO DÃN ĐA CHIỀU (CHỐNG TRÀN TUYỆT ĐỐI) -->
+      <div class="qr-modal-image-wrapper" id="modal-qr-svg-target"></div>
+
+      <!-- NÚT HÀNH ĐỘNG BÊN DƯỚI QR TỰ ĐỘNG THAY ĐỔI -->
+      <a href="#" class="qr-modal-action-link" id="modal-qr-action-link"></a>
+      <div class="qr-modal-hint">Đưa camera lại gần để quét trực tiếp</div>
+    </div>
+  </div>
+
+  
+  <script>
+    (function () {
+      "use strict";
+      const avatarImg = document.getElementById("avatar-image-element");
+      const fallbackBox = document.getElementById("avatar-svg-box");
+      function showLoadedAvatar(){ if(!avatarImg||!fallbackBox) return; avatarImg.style.display="block"; fallbackBox.style.display="none"; }
+      function showFallbackAvatar(){ if(!avatarImg||!fallbackBox) return; avatarImg.style.display="none"; fallbackBox.style.display="flex"; }
+      if(avatarImg){
+        avatarImg.addEventListener("load", showLoadedAvatar);
+        avatarImg.addEventListener("error", showFallbackAvatar);
+        if(avatarImg.complete){ if(avatarImg.naturalWidth>0) showLoadedAvatar(); else showFallbackAvatar(); }
+      }
+      const qrDataStore = {
+        phone: { title: "Mã QR Điện Thoại", templateId: "qr-phone", linkText: "0913.150.370", linkHref: "tel:0913150370", target: "_self" },
+        zalo: { title: "Mã QR Zalo", templateId: "qr-zalo", linkText: "Mở Zalo", linkHref: "https://zaloapp.com/qr/p/qajinelupg0h", target: "_blank" },
+        contact: { title: "Mã QR Liên Hệ", templateId: "qr-contact", linkText: "lien-he.tanchanh.workers.dev", linkHref: "https://lien-he.tanchanh.workers.dev", target: "_blank" }
+      };
+      const modalOverlay = document.getElementById("qr-modal-overlay");
+      const modalBox = document.getElementById("qr-modal-card-box");
+      const modalTitle = document.getElementById("modal-qr-title");
+      const modalSvgTarget = document.getElementById("modal-qr-svg-target");
+      const modalActionLink = document.getElementById("modal-qr-action-link");
+      const btnCloseQr = document.getElementById("btn-close-qr");
+      const btnFooterQr = document.getElementById("btn-footer-qr");
+      if(!modalOverlay || !modalBox || !modalTitle || !modalSvgTarget || !modalActionLink) return;
+      let prevOverflow = "";
+      let prevActiveElement = null;
+      function renderQrFromTemplate(templateId, targetEl){
+        if(!targetEl) return;
+        targetEl.innerHTML = "";
+        const tpl = document.getElementById(templateId);
+        if(tpl && tpl.content){ targetEl.appendChild(tpl.content.cloneNode(true)); }
+      }
+      const footerMount = document.getElementById("footer-qr-mount");
+      if(footerMount){ renderQrFromTemplate("qr-contact", footerMount); }
+      function openQrModal(type){
+        const data = qrDataStore[type] || qrDataStore.contact;
+        prevActiveElement = document.activeElement;
+        prevOverflow = document.body.style.overflow;
+        modalTitle.textContent = data.title;
+        renderQrFromTemplate(data.templateId, modalSvgTarget);
+        modalActionLink.textContent = data.linkText;
+        modalActionLink.href = data.linkHref;
+        modalActionLink.target = data.target;
+        modalActionLink.rel = data.target === "_blank" ? "noopener noreferrer" : "";
+        modalOverlay.classList.add("open");
+        modalOverlay.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        btnCloseQr?.focus();
+      }
+      function closeQrModal(){
+        modalOverlay.classList.remove("open");
+        modalOverlay.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = prevOverflow;
+        if(prevActiveElement && typeof prevActiveElement.focus === "function"){ prevActiveElement.focus(); }
+      }
+      document.querySelectorAll(".contact-qr-link").forEach(function (button){
+        button.addEventListener("click", function (e){
+          e.preventDefault(); e.stopPropagation();
+          openQrModal(button.getAttribute("data-qr"));
         });
-
-        const categoryMap = {
-            security: "Bảo mật",
-            calc: "Tính toán",
-            text: "Xử lý văn bản",
-            utility: "Tiện ích",
-            office: "Văn phòng",
-            simulation: "Mô phỏng",
-            health: "Sức khoẻ"
-        };
-
-        const projectsData = [
-            {
-                name: "che-do-doc",
-                emoji: "👓",
-                title: "Chế Độ Đọc",
-                description: "Phần mềm dùng để xem văn bản theo cách đơn giản và dễ đọc.",
-                category: "utility",
-                updated: "19/09/2026"
-            },
-            {
-                name: "tkb",
-                emoji: "🗓️",
-                title: "Thời Khoá Biểu",
-                description: "Quản lý thời khoá biểu cho nhiều lớp trên cùng một ứng dụng.",
-                category: "utility",
-                updated: "19/09/2026"
-            },
-            {
-                name: "chuyen-dang-anh",
-                emoji: "🖼️",
-                title: "Chuyển Ảnh Sang Dạng PNG/WebP/JPG",
-                description: "Phần mềm chuyển đổi, tối ưu hoá và nén dung lượng hình ảnh hàng loạt chạy trực tiếp trên trình duyệt máy khách (Client-side).",
-                category: "utility",
-                updated: "13/09/2026"
-            },
-            {
-                name: "tao-mat-ma",
-                emoji: "🔐",
-                title: "Tạo Mật Mã An Toàn",
-                description: "Công cụ tạo mật khẩu (password) mạnh ngẫu nhiên, tuỳ biến độ dài và độ phức tạp an toàn.",
-                category: "security",
-                updated: "09/09/2026"
-            },
-            {
-                name: "anh-thanh-pdf",
-                emoji: "🖼️",
-                title: "Chuyển Ảnh Thành File PDF",
-                description: "Chuyển 1 hoặc nhiều ảnh thành file PDF.",
-                category: "office",
-                updated: "05/09/2026"
-            },
-            {
-                name: "go-tat",
-                emoji: "🅰️",
-                title: "Soạn / Lưu Dữ Liệu Gõ Tắt",
-                description: "Lưu dữ liệu gõ tắt thường dùng cho hỏi đáp AI.",
-                category: "text",
-                updated: "04/09/2026"
-            },
-            {
-                name: "mahoa-giaima",
-                emoji: "🔑",
-                title: "Mã Hoá & Giải Mã AES-256",
-                description: "Ứng dụng giúp bạn bảo vệ bí mật nội dung tin nhắn, tài liệu và tập tin (file) bằng mật mã cá nhân trước khi gửi qua Zalo, Messenger, Email hay lưu trữ riêng tư. Có thể gửi ngay liên kết mã hoá văn bản.",
-                category: "security",
-                updated: "03/09/2026"
-            },
-            {
-                name: "sosanh-vanban",
-                emoji: "🔍",
-                title: "So Sánh Văn Bản",
-                description: "So sánh trực quan hai văn bản khác nhau để tìm ra điểm khác biệt.",
-                category: "text",
-                updated: "31/08/2026"
-            },
-            {
-                name: "sosanh-hash-virus",
-                emoji: "🛡️",
-                title: "So Sánh File & Check Virus",
-                description: "Tính toán chuỗi HASH (SHA-256) của tập tin để so sánh tính toàn vẹn và hỗ trợ quét nhanh dấu hiệu virus qua mã băm từ VirusTotal.",
-                category: "security",
-                updated: "31/08/2026"
-            },
-            {
-                name: "quet-tao-qrcode",
-                emoji: "🔲",
-                title: "Quét Và Tạo Mã QR",
-                description: "Quét và giải mã QR từ hình ảnh hoặc Clipboard. Tạo mã QR tuỳ chỉnh chất lượng cao dạng SVG hoặc PNG.",
-                category: "utility",
-                updated: "31/08/2026"
-            },
-            {
-                name: "duong-sinh",
-                emoji: "❤️",
-                title: "Tài Liệu Dưỡng Sinh - Dương Tấn Chánh",
-                description: "Chữa Bệnh Không Dùng Thuốc Trong Đông Y.",
-                category: "health",
-                updated: "29/08/2026"
-            },
-            {
-                name: "xuly-vanban",
-                emoji: "🔤",
-                title: "Công Cụ Xử Lý Văn Bản",
-                description: "Cung cấp các bộ chuyển đổi chữ thường, chữ hoa, thêm hashtag cho bài viết, loại bỏ ký tự không hợp lệ dùng cho tên file, loại bỏ dấu tiếng Việt...",
-                category: "text",
-                updated: "24/08/2026"
-            },
-            {
-                name: "markdown-latex-to-doc",
-                emoji: "📝",
-                title: "Chuyển Đổi Markdown & LaTeX",
-                description: "Chuyển đổi nội dung văn bản Markdown từ Gemini, ChatGPT... có kèm các công thức toán học LaTeX sang định dạng tài liệu Word (.docx), Google Docs.",
-                category: "text",
-                updated: "18/09/2026"
-            },
-            {
-                name: "lay-lien-ket",
-                emoji: "🔗",
-                title: "Lấy Liên Kết Từ PDF/HTML/Dán/Ctrl-V",
-                description: "Ứng dụng giúp trích xuất toàn bộ các đường dẫn liên kết (Hyperlink và URL văn bản) từ các tập tin PDF, HTML, HTM hoặc nội dung dán từ Clipboard (Word, Web, Email...) một cách nhanh chóng.",
-                category: "text",
-                updated: "07/08/2026"
-            },
-            {
-                name: "anh-tu-docx-pdf",
-                emoji: "🖼️",
-                title: "Lấy Ảnh Từ DOCX & PDF",
-                description: "Trích xuất ảnh gốc từ file PDF, Word (.docx) và hỗ trợ chuyển từng trang PDF thành định dạng hình ảnh.",
-                category: "office",
-                updated: "30/07/2026"
-            },
-            {
-                name: "quanly-thuchi",
-                emoji: "💰",
-                title: "Quản Lý Thu Chi Hộ Gia Đình",
-                description: "Ứng dụng quản lý thu chi cá nhân, hộ gia đình chạy ngoại tuyến (offline), mã hoá dữ liệu bằng thuật toán mạnh, bảo mật cực cao.",
-                category: "calc",
-                updated: "26/07/2026"
-            },
-            {
-                name: "chuyen-dinhdang-amthanh",
-                emoji: "🎵",
-                title: "Chuyển Đổi Âm Thanh, Video",
-                description: "Chuyển đổi hàng loạt tập tin âm thanh, video sang định dạng OPUS nhỏ gọn chất lượng cao, WAV không nén hoặc MP3 thông dụng.",
-                category: "utility",
-                updated: "21/07/2026"
-            },
-            {
-                name: "tinhluong",
-                emoji: "💵",
-                title: "Công Cụ Tính Lương",
-                description: "Tính tổng lương thực nhận từ các khoản phụ cấp và khấu trừ bảo hiểm theo quy định.",
-                category: "calc",
-                updated: "14/07/2026"
-            },
-            {
-                name: "xem-html",
-                emoji: "🖥️",
-                title: "Xem Nội Dung Mã Nguồn HTML",
-                description: "Công cụ gọn nhẹ dùng xem, soạn thảo, thử nghiệm và lưu trữ các tập tin mã nguồn HTML trực tiếp trên trình duyệt.",
-                category: "utility",
-                updated: "14/07/2026"
-            },
-            {
-                name: "chinh-co-anh-trong-docx",
-                emoji: "🖼️",
-                title: "Tự Động Chỉnh Kích Thước Ảnh Trong DOCX",
-                description: "Điều chỉnh kích thước hình ảnh trong tài liệu DOCX (Word) hoàn toàn tự động và đồng bộ.",
-                category: "office",
-                updated: "14/07/2026"
-            },
-            {
-                name: "huyet-ap",
-                emoji: "🩺",
-                title: "Huyết Áp Của Bạn",
-                description: "Theo dõi chỉ số huyết áp và nhịp tim offline. Tự động phân tích chẩn đoán y khoa từ cẩm nang chuẩn, vẽ biểu đồ đường SVG kép trực quan, mã hoá bảo mật dữ liệu cục bộ và hỗ trợ xuất/nhập sao lưu CSV.",
-                category: "health",
-                updated: "09/07/2026"
-            },
-            {
-                name: "xoa-font-pdf",
-                emoji: "🔤",
-                title: "Xoá Font Trong File PDF",
-                description: "Gỡ bỏ các bộ Font nhúng không cần thiết để tối ưu và giảm dung lượng tập tin PDF.",
-                category: "office",
-                updated: "08/07/2026"
-            },
-            {
-                name: "danh-sach-karaoke",
-                emoji: "🎤",
-                title: "Chuẩn Hoá Ghi Chú Karaoke",
-                description: "Chuẩn hoá danh mục ghi chép Karaoke từ tập tin TXT hoặc Clipboard để sử dụng ngay hoặc lưu trữ.",
-                category: "text",
-                updated: "05/07/2026"
-            },
-            {
-                name: "he-mat-troi-3d",
-                emoji: "🪐",
-                title: "Mô Hình Hệ Mặt Trời 3D",
-                description: "Mô hình Hệ Mặt Trời 3D tương tác trực quan, có thể xoay góc nhìn, phóng to, điều chỉnh tốc độ quỹ đạo và theo dõi thông tin chi tiết của từng hành tinh.",
-                category: "simulation",
-                updated: "25/06/2026"
-            },
-            {
-                name: "don-xin-nghi",
-                emoji: "📄",
-                title: "Tạo Đơn Xin Tạm Nghỉ Việc",
-                description: "Tạo đơn xin tạm nghỉ việc định dạng Word (.docx) đúng chuẩn văn bản hành chính hiện hành.",
-                category: "office",
-                updated: "10/06/2026"
-            },
-            {
-                name: "pha-con",
-                emoji: "🧪",
-                title: "Tính Lượng Nước Pha Cồn",
-                description: "Hỗ trợ tính lượng nước cần bổ sung hoặc thể tích cần đạt được để giảm nồng độ cồn chính xác.",
-                category: "calc",
-                updated: "07/06/2026"
-            },
-            {
-                name: "csv-tsv",
-                emoji: "📊",
-                title: "Xem & Sửa File CSV/TSV",
-                description: "Công cụ đơn giản, trực quan cho phép tải lên, lọc, chỉnh sửa ô dữ liệu và tải về các tập tin CSV hoặc TSV một cách nhanh chóng.",
-                category: "office",
-                updated: "07/06/2026"
-            },
-            {
-                name: "nhau-ruou-ot",
-                emoji: "🍶",
-                title: "Công Thức Nhàu & Rượu Ớt",
-                description: "Cung cấp công thức và các bước chi tiết để làm nước Nhàu ngâm đường và Rượu Ớt chăm sóc sức khoẻ.",
-                category: "health",
-                updated: "06/06/2026"
-            }
-        ];
-
-        function removeAccents(str) {
-            if (!str) return "";
-            return str
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .replace(/đ/g, "d")
-                .replace(/Đ/g, "D")
-                .toLowerCase();
-        }
-
-        function stripHtmlTags(html) {
-            if (!html) return "";
-            return html.replace(/<[^>]*>?/gm, " ");
-        }
-
-        // Làm sạch mã slug URL an toàn
-        function sanitizeSlug(slug) {
-            if (!slug) return "";
-            return slug.trim().toLowerCase().replace(/[^a-z0-9-]/g, "");
-        }
-
-        // Chuyển đổi và kiểm tra ngày chặt chẽ chống trượt ngày (Rollover)
-        function parseDateToTimestamp(dateStr) {
-            if (!dateStr || typeof dateStr !== "string") return 0;
-            const parts = dateStr.trim().split("/");
-            if (parts.length !== 3) return 0;
-            const day = parseInt(parts[0], 10);
-            const month = parseInt(parts[1], 10) - 1;
-            const year = parseInt(parts[2], 10);
-
-            if (isNaN(day) || isNaN(month) || isNaN(year)) return 0;
-
-            const dateObj = new Date(year, month, day);
-            if (dateObj.getFullYear() !== year || dateObj.getMonth() !== month || dateObj.getDate() !== day) {
-                return 0;
-            }
-            return dateObj.getTime();
-        }
-
-        const projectItemsListEl = document.getElementById("project-items-list");
-        const searchInputEl = document.getElementById("search-input");
-        const clearFiltersBtnEl = document.getElementById("clear-filters-btn");
-        const filtersContainerEl = document.getElementById("filters-container");
-        const emptyResultsBoxEl = document.getElementById("empty-results-box");
-        const totalCountEl = document.getElementById("total-count");
-
-        let currentFilter = "all";
-        let searchQuery = "";
-
-        // Tiền xử lý dữ liệu an toàn (Phòng ngừa thiếu thuộc tính và tự sắp xếp ngày mới nhất lên đầu)
-        const preprocessedProjects = projectsData
-            .map(proj => {
-                const safeTitle = proj.title || "Ứng dụng chưa đặt tên";
-                const safeName = sanitizeSlug(proj.name);
-                const safeEmoji = proj.emoji || "📦";
-                const safeDesc = proj.description || "";
-                const safeCategory = (proj.category || "utility").toLowerCase();
-                const safeUpdated = proj.updated || "01/01/2026";
-
-                const rawDescriptionText = stripHtmlTags(safeDesc);
-                const categoryText = categoryMap[safeCategory] || safeCategory;
-                const searchIndex = removeAccents(`${safeTitle} ${safeName} ${rawDescriptionText} ${categoryText}`);
-
-                return {
-                    name: safeName,
-                    emoji: safeEmoji,
-                    title: safeTitle,
-                    description: safeDesc,
-                    category: safeCategory,
-                    updated: safeUpdated,
-                    timestamp: parseDateToTimestamp(safeUpdated),
-                    searchIndex: searchIndex
-                };
-            })
-            .sort((a, b) => b.timestamp - a.timestamp);
-
-        function renderFilters() {
-            const activeCategories = [...new Set(preprocessedProjects.map(p => p.category))];
-            let filtersHtml = `<button type="button" class="filter-pill-button active" data-filter="all" aria-pressed="true">Tất cả</button>`;
-
-            for (const [key, value] of Object.entries(categoryMap)) {
-                if (activeCategories.includes(key)) {
-                    filtersHtml += `<button type="button" class="filter-pill-button" data-filter="${key}" aria-pressed="false">${value}</button>`;
-                }
-            }
-
-            activeCategories.forEach(cat => {
-                if (!(cat in categoryMap)) {
-                    filtersHtml += `<button type="button" class="filter-pill-button" data-filter="${cat}" aria-pressed="false">${cat}</button>`;
-                }
-            });
-
-            filtersContainerEl.innerHTML = filtersHtml;
-
-            const buttons = filtersContainerEl.querySelectorAll(".filter-pill-button");
-            buttons.forEach(btn => {
-                btn.addEventListener("click", () => {
-                    buttons.forEach(b => {
-                        b.classList.remove("active");
-                        b.setAttribute("aria-pressed", "false");
-                    });
-                    btn.classList.add("active");
-                    btn.setAttribute("aria-pressed", "true");
-                    currentFilter = btn.getAttribute("data-filter");
-                    renderProjects();
-                    updateClearButtonVisibility();
-                });
-            });
-        }
-
-        function syncFilterButtonUI() {
-            const buttons = filtersContainerEl.querySelectorAll(".filter-pill-button");
-            buttons.forEach(btn => {
-                const isActive = (btn.getAttribute("data-filter") === currentFilter);
-                btn.classList.toggle("active", isActive);
-                btn.setAttribute("aria-pressed", isActive ? "true" : "false");
-            });
-        }
-
-        // Cập nhật trạng thái ẩn/hiện của nút "Xoá Lọc"
-        function updateClearButtonVisibility() {
-            const hasSearch = searchQuery.trim() !== "";
-            const hasFilter = currentFilter !== "all";
-            if (hasSearch || hasFilter) {
-                clearFiltersBtnEl.style.display = "inline-flex";
-            } else {
-                clearFiltersBtnEl.style.display = "none";
-            }
-        }
-
-        // Hàm đặt lại toàn bộ bộ lọc và tìm kiếm về trạng thái ban đầu
-        function resetAllFilters() {
-            searchInputEl.value = "";
-            searchQuery = "";
-            currentFilter = "all";
-            syncFilterButtonUI();
-            renderProjects();
-            updateClearButtonVisibility();
-            searchInputEl.focus();
-        }
-
-        function renderProjects() {
-            projectItemsListEl.innerHTML = "";
-            const cleanQuery = removeAccents(searchQuery.trim());
-            const queryTokens = cleanQuery ? cleanQuery.split(/\s+/).filter(Boolean) : [];
-
-            // Thuật toán kiểm tra điều kiện tìm kiếm theo từng từ đơn (khắc phục lỗi tìm đảo trật tự từ)
-            const matchProject = (proj) => {
-                if (queryTokens.length === 0) return true;
-                return queryTokens.every(token => proj.searchIndex.includes(token));
-            };
-
-            // Khắc phục bẫy bộ lọc (Filter Trap): Tự động mở rộng sang 'all' nếu danh mục hiện tại không có kết quả nhưng danh mục khác có
-            if (currentFilter !== "all" && queryTokens.length > 0) {
-                const matchesInCurrentCategory = preprocessedProjects.some(proj => proj.category === currentFilter && matchProject(proj));
-                if (!matchesInCurrentCategory) {
-                    const matchesAnywhere = preprocessedProjects.some(proj => matchProject(proj));
-                    if (matchesAnywhere) {
-                        currentFilter = "all";
-                        syncFilterButtonUI();
-                    }
-                }
-            }
-
-            const filteredProjects = preprocessedProjects.filter(proj => {
-                const matchesFilter = (currentFilter === "all" || proj.category === currentFilter);
-                if (!matchesFilter) return false;
-                return matchProject(proj);
-            });
-
-            totalCountEl.textContent = filteredProjects.length;
-
-            if (filteredProjects.length === 0) {
-                emptyResultsBoxEl.style.display = "flex";
-                return;
-            }
-
-            emptyResultsBoxEl.style.display = "none";
-
-            const fragment = document.createDocumentFragment();
-
-            filteredProjects.forEach(proj => {
-                const card = document.createElement("article");
-                card.className = "project-row-card";
-
-                const categoryLabel = categoryMap[proj.category] || proj.category;
-                const projectUrl = `https://${proj.name}.tanchanh.workers.dev/`;
-
-                card.innerHTML = `
-                    <div class="project-card-header">
-                        <a href="${projectUrl}" target="_blank" rel="noopener" class="project-direct-link">
-                            <span class="project-emoji-icon">${proj.emoji}</span>
-                            <h2 class="project-heading">${proj.title}</h2>
-                        </a>
-                    </div>
-                    <p class="project-description-text">${proj.description}</p>
-                    <div class="project-meta-info">
-                        <span>Cập nhật: ${proj.updated}</span>
-                        <span class="project-category-badge">${categoryLabel}</span>
-                    </div>
-                `;
-                fragment.appendChild(card);
-            });
-
-            projectItemsListEl.appendChild(fragment);
-        }
-
-        searchInputEl.addEventListener("input", (e) => {
-            searchQuery = e.target.value;
-            updateClearButtonVisibility();
-            renderProjects();
-        });
-
-        clearFiltersBtnEl.addEventListener("click", () => {
-            resetAllFilters();
-        });
-
-        // Xử lý phím tắt ESC phân cấp thông minh
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") {
-                // Ưu tiên 1: Đóng bảng QR nếu đang mở
-                if (authorQrPanelEl && authorQrPanelEl.classList.contains("active")) {
-                    toggleQrPanel(false);
-                    avatarBoxEl.focus();
-                    return;
-                }
-                // Ưu tiên 2: Nếu có bộ lọc hoặc tìm kiếm đang hoạt động, xoá sạch toàn bộ
-                const hasSearch = searchQuery.trim() !== "";
-                const hasFilter = currentFilter !== "all";
-                if (hasSearch || hasFilter) {
-                    resetAllFilters();
-                }
-            }
-        });
-
-        // Khởi chạy ứng dụng an toàn trong khối try-catch, không dùng style inline
-        try {
-            renderFilters();
-            renderProjects();
-            updateClearButtonVisibility();
-        } catch (err) {
-            console.error("Lỗi khởi chạy:", err);
-            emptyResultsBoxEl.style.display = "flex";
-            emptyResultsBoxEl.innerHTML = `<p class="system-error-text">Đã xảy ra lỗi nạp dữ liệu. Vui lòng kiểm tra lại!</p>`;
-        }
-    </script>
+      });
+      btnFooterQr?.addEventListener("click", function (e){ e.preventDefault(); e.stopPropagation(); openQrModal("contact"); });
+      modalBox.addEventListener("click", function (e){ e.stopPropagation(); });
+      btnCloseQr?.addEventListener("click", function (e){ e.preventDefault(); closeQrModal(); });
+      modalOverlay.addEventListener("click", function (e){ if(e.target === modalOverlay) closeQrModal(); });
+      window.addEventListener("keydown", function (e){ if(e.key === "Escape" && modalOverlay.classList.contains("open")) closeQrModal(); });
+    })();
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dương Tấn Chánh",
+    "telephone": "+84913150370",
+    "email": "chanh.rebirth026@aleeas.com",
+    "url": "https://app.tanchanh.workers.dev",
+    "worksFor": { "@type": "Organization", "name": "TIDA" }
+  }
+  </script>
 </body>
-
 </html>
